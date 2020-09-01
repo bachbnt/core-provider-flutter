@@ -1,4 +1,4 @@
-import 'package:bach_flutter_app/constants/enums.dart';
+import 'package:bach_flutter_app/view_models/main_model.dart';
 import 'package:flutter/widgets.dart';
 
 typedef MainViewChildCallback = Function(MainViewChild);

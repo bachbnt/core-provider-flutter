@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SecondView extends StatefulWidget {
-  final args;
+  SecondView(this.arguments);
 
-  SecondView(this.args);
+  final dynamic arguments;
 
   @override
   _SecondViewState createState() => _SecondViewState();

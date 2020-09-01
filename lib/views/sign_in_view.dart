@@ -27,10 +27,10 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) {
     ScreenUtils.init(context);
     return MultiBaseView<SignInModel, ValidationModel>(
-      model: SignInModel(),
+      model1: SignInModel(),
       model2: ValidationModel(),
-      onModelReady: (model) async {},
-      builder: (context, signInModel, validationModel, _) => Scaffold(
+      onModelReady: (_, __) async {},
+      builder: (BuildContext context,SignInModel signInModel,ValidationModel validationModel, _) => Scaffold(
         key: _key,
         body: _buildView(context, signInModel, validationModel),
       ),

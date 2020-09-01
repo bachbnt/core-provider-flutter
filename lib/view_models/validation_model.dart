@@ -1,18 +1,20 @@
+import 'package:bach_flutter_app/view_models/base_model.dart';
 import 'package:flutter/material.dart';
 
 class ValidationItem {
+  ValidationItem({this.value, this.error});
+
   final String value;
   final String error;
 
-  ValidationItem({this.value, this.error});
 }
 
-class ValidationModel extends ChangeNotifier {
+class ValidationModel extends BaseModel {
   ValidationItem _email = ValidationItem();
   ValidationItem _firstName = ValidationItem();
   ValidationItem _lastName = ValidationItem();
   ValidationItem _password = ValidationItem();
-  ValidationItem _confirmPassword = ValidationItem();
+  ValidationItem _confirmationPassword = ValidationItem();
   ValidationItem _phone = ValidationItem();
 
   ValidationItem get email => _email;
@@ -23,7 +25,7 @@ class ValidationModel extends ChangeNotifier {
 
   ValidationItem get password => _password;
 
-  ValidationItem get confirmPassword => _confirmPassword;
+  ValidationItem get confirmationPassword => _confirmationPassword;
 
   ValidationItem get phone => _phone;
 
@@ -43,8 +45,8 @@ class ValidationModel extends ChangeNotifier {
     _password = ValidationItem(value: value);
   }
 
-  void onConfirmPasswordChanged(String value) {
-    _confirmPassword = ValidationItem(value: value);
+  void onConfirmationPasswordChanged(String value) {
+    _confirmationPassword = ValidationItem(value: value);
   }
 
   void onPhoneChanged(String value) {
@@ -116,11 +118,11 @@ class ValidationModel extends ChangeNotifier {
       notifyListeners();
       return false;
     } else if (confirmPassword == null || confirmPassword.isEmpty) {
-      _confirmPassword = ValidationItem(error: 'Confirm password must not be empty');
+      _confirmationPassword = ValidationItem(error: 'Confirm password must not be empty');
       notifyListeners();
       return false;
     } else if (confirmPassword.length < 6) {
-      _confirmPassword = ValidationItem(
+      _confirmationPassword = ValidationItem(
           value: confirmPassword,
           error: 'Confirm password must be at least 6 characters');
       notifyListeners();
@@ -129,7 +131,7 @@ class ValidationModel extends ChangeNotifier {
       _password = ValidationItem(
           value: password,
           error: 'Password and confirm password are not match');
-      _confirmPassword = ValidationItem(
+      _confirmationPassword = ValidationItem(
           value: confirmPassword,
           error: 'Password and confirm password are not match');
       notifyListeners();

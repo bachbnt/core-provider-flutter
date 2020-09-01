@@ -1,12 +1,14 @@
+import 'package:bach_flutter_app/app_localizations.dart';
 import 'package:bach_flutter_app/constants/definitions.dart';
-import 'package:bach_flutter_app/constants/enums.dart';
+import 'package:bach_flutter_app/view_models/main_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AppBottomNavigation extends StatefulWidget {
-  final MainViewChildCallback callback;
+  const AppBottomNavigation({Key key, @required this.callback})
+      : super(key: key);
 
-  const AppBottomNavigation({Key key, this.callback}) : super(key: key);
+  final MainViewChildCallback callback;
 
   @override
   _AppBottomNavigationState createState() => _AppBottomNavigationState();
@@ -15,44 +17,34 @@ class AppBottomNavigation extends StatefulWidget {
 class _AppBottomNavigationState extends State<AppBottomNavigation> {
   int _selectedIndex = 0;
 
-  final List<IconData> _icons = [
-    Icons.title,
-    Icons.title,
-    Icons.title,
-    Icons.title,
-    Icons.title
-  ];
-
-  final List<String> _titles = [
-    'title1',
-    'title2',
-    'title3',
-    'title4',
-    'title5'
-  ];
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: [
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: Icon(_icons[0]),
-            title: Text(toBeginningOfSentenceCase(_titles[0]))),
+            icon: Icon(mainViewIcons[0]),
+            title: Text(toBeginningOfSentenceCase(
+                AppLocalizations.of(context).translate(mainViewTitles[0])))),
         BottomNavigationBarItem(
-            icon: Icon(_icons[1]),
-            title: Text(toBeginningOfSentenceCase(_titles[1]))),
+            icon: Icon(mainViewIcons[1]),
+            title: Text(toBeginningOfSentenceCase(
+                AppLocalizations.of(context).translate(mainViewTitles[1])))),
         BottomNavigationBarItem(
-            icon: Icon(_icons[2]),
-            title: Text(toBeginningOfSentenceCase(_titles[2]))),
+            icon: Icon(mainViewIcons[2]),
+            title: Text(toBeginningOfSentenceCase(
+                AppLocalizations.of(context).translate(mainViewTitles[2])))),
         BottomNavigationBarItem(
-            icon: Icon(_icons[3]),
-            title: Text(toBeginningOfSentenceCase(_titles[3]))),
+            icon: Icon(mainViewIcons[3]),
+            title: Text(toBeginningOfSentenceCase(
+                AppLocalizations.of(context).translate(mainViewTitles[3])))),
         BottomNavigationBarItem(
-            icon: Icon(_icons[4]),
-            title: Text(toBeginningOfSentenceCase(_titles[4]))),
+            icon: Icon(mainViewIcons[4]),
+            title: Text(toBeginningOfSentenceCase(
+                AppLocalizations.of(context).translate(mainViewTitles[4])))),
       ],
       currentIndex: _selectedIndex,
-      onTap: (index) {
+      onTap: (int index) {
         setState(() {
           _selectedIndex = index;
           switch (index) {

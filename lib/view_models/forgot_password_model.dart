@@ -13,14 +13,17 @@ class ForgotPasswordModel extends BaseModel {
       bool success = await _authService.resetPassword(email);
       setState(ViewState.Idle);
       if (success)
-        CustomToast.showSuccessToast('Success');
+        CustomToast.showCustomToast(
+            message: 'Success', toastType: ToastType.Success);
       else
-        CustomToast.showFailureToast('Failure');
+        CustomToast.showCustomToast(
+            message: 'Failure', toastType: ToastType.Failure);
       return success;
     } catch (e) {
       error = e.toString();
       setState(ViewState.Idle);
-      CustomToast.showFailureToast('Failure $error');
+      CustomToast.showCustomToast(
+          message: 'Failure $error', toastType: ToastType.Failure);
       return false;
     }
   }

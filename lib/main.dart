@@ -7,11 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/single_child_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(
-    providers: [
+    providers: <SingleChildWidget>[
       ChangeNotifierProvider<ThemeModel>(
         create: (_) => ThemeModel(),
       ),
@@ -26,22 +27,22 @@ void main() {
 class FlutterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer2<ThemeModel, LocaleModel>(
-      builder: (context, themeModel, localeModel, _) => MaterialApp(
-        localizationsDelegates: [
+    return Consumer2<ThemeModel, LocaleModel>(builder: (BuildContext context,
+        ThemeModel themeModel, LocaleModel localeModel, _) {
+      return MaterialApp(
+        localizationsDelegates: <LocalizationsDelegate<dynamic>>[
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: LocaleModel.locales,
+        supportedLocales: supportedLocales,
         theme: themeModel.currentTheme,
         locale: localeModel.currentLocale,
-        darkTheme: ThemeData.dark(),
         onGenerateRoute: AppRouter.generateRoute,
         initialRoute: initialRoute,
         home: SignInView(),
-      ),
-    );
+      );
+    });
   }
 }

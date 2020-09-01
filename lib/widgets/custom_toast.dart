@@ -3,31 +3,28 @@ import 'package:bach_flutter_app/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 
+enum ToastType { Success, Warning, Failure }
+
 class CustomToast {
-  static showSuccessToast(String msg) {
-    showToast(msg,
+  static void showCustomToast(
+      {@required String message, @required ToastType toastType}) {
+    Color toastColor;
+    switch (toastType) {
+      case (ToastType.Success):
+        toastColor = AppColors.successColor;
+        break;
+      case (ToastType.Warning):
+        toastColor = AppColors.warningColor;
+        break;
+      case (ToastType.Failure):
+        toastColor = AppColors.failureColor;
+        break;
+    }
+    showToast(message,
         duration: const Duration(seconds: 1),
-        backgroundColor: AppColors.successColor,
+        backgroundColor: toastColor,
         position: ToastPosition.bottom,
         textStyle: AppStyles.mediumNormalWhite,
-        textPadding: EdgeInsets.all(8.0));
-  }
-
-  static showWarningToast(String msg) {
-    showToast(msg,
-        duration: const Duration(seconds: 1),
-        backgroundColor: AppColors.warningColor,
-        position: ToastPosition.bottom,
-        textStyle: AppStyles.mediumNormalWhite,
-        textPadding: EdgeInsets.all(8.0));
-  }
-
-  static showFailureToast(String msg) {
-    showToast(msg,
-        duration: const Duration(seconds: 1),
-        backgroundColor: AppColors.failureColor,
-        position: ToastPosition.bottom,
-        textStyle: AppStyles.mediumNormalWhite,
-        textPadding: EdgeInsets.all(8.0));
+        textPadding: const EdgeInsets.all(8.0));
   }
 }

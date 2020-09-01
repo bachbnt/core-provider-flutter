@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FirstView extends StatefulWidget {
-  final args;
+  FirstView(this.arguments);
 
-  FirstView(this.args);
+  final dynamic arguments;
 
   @override
   _FirstViewState createState() => _FirstViewState();

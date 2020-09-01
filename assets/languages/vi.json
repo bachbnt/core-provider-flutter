@@ -1,11 +1,11 @@
 {
   "email": "email",
   "password": "mật khẩu",
-  "confirm password": "xác nhận mật khẩu",
+  "confirmation password": "xác nhận mật khẩu",
   "first name": "tên",
   "last name": "họ",
-  "phone": "số điện thoại",
-  "birthday": "ngày sinh",
+  "phone number": "số điện thoại",
+  "date of birth": "ngày sinh",
   "gender": "giới tính",
   "address": "địa chỉ",
   "sign in": "đăng nhập",
@@ -15,7 +15,14 @@
   "dark mode": "chế độ tối",
   "language": "ngôn ngữ",
   "english": "tiếng anh",
+  "chinese": "tiếng trung",
   "vietnamese": "tiếng việt",
   "back": "trở về",
-  "confirm": "confirm"
+  "confirm": "xác nhận",
+  "title1": "tiêu đề 1",
+  "title2": "tiêu đề 2",
+  "title3": "tiêu đề 3",
+  "title4": "tiêu đề 4",
+  "title5": "tiêu đề 5",
+  "setting": "cài đặt"
 }

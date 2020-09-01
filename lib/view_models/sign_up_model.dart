@@ -14,18 +14,21 @@ class SignUpModel extends BaseModel {
   Future<bool> signUp() async {
     setState(ViewState.Busy);
     try {
-      bool success =
+      final bool success =
           await _authService.signUp(email, password, firstName, lastName);
       setState(ViewState.Idle);
       if (success)
-        CustomToast.showSuccessToast('Success');
+        CustomToast.showCustomToast(
+            message: 'Success', toastType: ToastType.Success);
       else
-        CustomToast.showFailureToast('Failure');
+        CustomToast.showCustomToast(
+            message: 'Failure', toastType: ToastType.Failure);
       return success;
     } catch (e) {
       error = e.toString();
       setState(ViewState.Idle);
-      CustomToast.showFailureToast('Failure $error');
+      CustomToast.showCustomToast(
+          message: 'Failure $error', toastType: ToastType.Failure);
       return false;
     }
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FourthView extends StatefulWidget {
-  final args;
+  FourthView(this.arguments);
 
-  FourthView(this.args);
+  final dynamic arguments;
 
   @override
   _FourthViewState createState() => _FourthViewState();

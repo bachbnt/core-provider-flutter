@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ThirdView extends StatefulWidget {
-  final args;
+  ThirdView(this.arguments);
 
-  ThirdView(this.args);
+  final dynamic arguments;
 
   @override
   _ThirdViewState createState() => _ThirdViewState();

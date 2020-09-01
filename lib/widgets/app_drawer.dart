@@ -1,85 +1,75 @@
 import 'package:bach_flutter_app/app_localizations.dart';
+import 'package:bach_flutter_app/app_router.dart';
 import 'package:bach_flutter_app/constants/definitions.dart';
-import 'package:bach_flutter_app/constants/enums.dart';
 import 'package:bach_flutter_app/models/user.dart';
-import 'package:bach_flutter_app/services/repository.dart';
+import 'package:bach_flutter_app/view_models/main_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AppDrawer extends StatefulWidget {
-  final MainViewChildCallback callback;
+  const AppDrawer(
+      {Key key, @required this.callback, @required this.currentUser})
+      : super(key: key);
 
-  const AppDrawer({Key key, this.callback}) : super(key: key);
+  final MainViewChildCallback callback;
+  final User currentUser;
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  final Repository _repository = Repository.instance;
-  User _user;
-
-  final List<IconData> _icons = [
-    Icons.title,
-    Icons.title,
-    Icons.title,
-    Icons.title,
-    Icons.title
-  ];
-
-  final List<String> _titles = [
-    'title1',
-    'title2',
-    'title3',
-    'title4',
-    'title5'
-  ];
-
-  @override
-  void initState() {
-    _repository.initUser(User(firstName: 'bach',lastName: 'bui',email: 'bachbnt@devblock.net'));
-    _user = _repository.currentUser;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(children: [
+      child: ListView(children: <Widget>[
         UserAccountsDrawerHeader(
-          currentAccountPicture: CircleAvatar(),
-          accountName: Text('${_user.firstName} ${_user.lastName}'),
-          accountEmail: Text('${_user.email}'),
+          currentAccountPicture: const CircleAvatar(),
+          accountName: Text(
+              '${widget.currentUser.firstName} ${widget.currentUser.lastName}'),
+          accountEmail: Text('${widget.currentUser.email}'),
         ),
         ListTile(
           title: Text(
-              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${_titles[0]}'))}'),
-          leading: Icon(_icons[0]),
+              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${mainViewTitles[0]}'))}'),
+          leading: Icon(mainViewIcons[0]),
           onTap: () => widget.callback(MainViewChild.MainView1),
         ),
         ListTile(
           title: Text(
-              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${_titles[1]}'))}'),
-          leading: Icon(_icons[1]),
+              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${mainViewTitles[1]}'))}'),
+          leading: Icon(mainViewIcons[1]),
           onTap: () => widget.callback(MainViewChild.MainView2),
         ),
         ListTile(
           title: Text(
-              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${_titles[2]}'))}'),
-          leading: Icon(_icons[2]),
+              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${mainViewTitles[2]}'))}'),
+          leading: Icon(mainViewIcons[2]),
           onTap: () => widget.callback(MainViewChild.MainView3),
         ),
         ListTile(
           title: Text(
-              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${_titles[3]}'))}'),
-          leading: Icon(_icons[3]),
+              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${mainViewTitles[3]}'))}'),
+          leading: Icon(mainViewIcons[3]),
           onTap: () => widget.callback(MainViewChild.MainView4),
         ),
         ListTile(
           title: Text(
-              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${_titles[4]}'))}'),
-          leading: Icon(_icons[4]),
+              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${mainViewTitles[4]}'))}'),
+          leading: Icon(mainViewIcons[4]),
           onTap: () => widget.callback(MainViewChild.MainView5),
+        ),
+        ListTile(
+          title: Text(
+              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('setting'))}'),
+          leading: Icon(mainViewIcons[5]),
+          onTap: () => Navigator.of(context).pushNamed(settingRoute),
+        ),
+        ListTile(
+          title: Text(
+              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('sign out'))}'),
+          leading: Icon(mainViewIcons[6]),
+          onTap: () => Navigator.of(context).pushReplacementNamed(signInRoute),
         ),
       ]),
     );

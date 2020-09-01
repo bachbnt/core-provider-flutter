@@ -20,20 +20,22 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
-  final _key = GlobalKey<ScaffoldState>();
+  final GlobalKey _key = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     ScreenUtils.init(context);
 
     return MultiBaseView<SignUpModel, ValidationModel>(
-      model: SignUpModel(),
+      model1: SignUpModel(),
       model2: ValidationModel(),
-      onModelReady: (model) async {},
-      builder: (context, signUpModel, validationModel, _) => Scaffold(
-        key: _key,
-        body: _buildView(context, signUpModel, validationModel),
-      ),
+      builder: (BuildContext context, SignUpModel signUpModel,
+          ValidationModel validationModel, _) {
+        return Scaffold(
+          key: _key,
+          body: _buildView(context, signUpModel, validationModel),
+        );
+      },
     );
   }
 
@@ -45,12 +47,12 @@ class _SignUpViewState extends State<SignUpView> {
             left: ScreenUtils.screenWidth / 24,
             right: ScreenUtils.screenWidth / 24),
         child: OrientationSwitch(
-          children: [
+          children: <Widget>[
             SizedBox(
                 width: ScreenUtils.orientation == Orientation.portrait
                     ? ScreenUtils.screenHeight / 2
                     : ScreenUtils.screenWidth / 2,
-                child: Image(image: AssetImage(AppImages.logo))),
+                child: Image.asset(AppImages.logo)),
             Expanded(
               child: signUpModel.viewState == ViewState.Busy
                   ? CustomProgressIndicator()
@@ -58,14 +60,14 @@ class _SignUpViewState extends State<SignUpView> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: <Widget>[
                         CustomTextField(
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.email))}',
                           errorText: validationModel.email.error,
                           controller: TextEditingController(
                               text: validationModel.email.value),
-                          onChanged: (value) {
+                          onChanged: (String value) {
                             signUpModel.email = value.trim();
                             validationModel.onEmailChanged(value.trim());
                           },
@@ -107,13 +109,14 @@ class _SignUpViewState extends State<SignUpView> {
                         CustomTextField(
                           obscureText: true,
                           hintText:
-                              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.confirmPassword))}',
-                          errorText: validationModel.confirmPassword.error,
+                              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.confirmationPassword))}',
+                          errorText: validationModel.confirmationPassword.error,
                           controller: TextEditingController(
-                              text: validationModel.confirmPassword.value),
+                              text: validationModel.confirmationPassword.value),
                           onChanged: (value) {
                             signUpModel.confirmPassword = value.trim();
-                            validationModel.onConfirmPasswordChanged(value.trim());
+                            validationModel
+                                .onConfirmationPasswordChanged(value.trim());
                           },
                         ),
                         Column(

@@ -1,11 +1,11 @@
 {
   "email": "email",
   "password": "password",
-  "confirm password": "confirm password",
+  "confirmation password": "confirmation password",
   "first name": "first name",
   "last name": "last name",
-  "phone": "phone",
-  "birthday": "birthday",
+  "phone number": "phone number",
+  "date of birth": "date of birth",
   "gender": "gender",
   "address": "address",
   "sign in": "sign in",
@@ -15,7 +15,14 @@
   "dark mode": "dark mode",
   "language": "language",
   "english": "english",
+  "chinese": "chinese",
   "vietnamese": "vietnamese",
   "back": "back",
-  "confirm": "confirm"
+  "confirm": "confirm",
+  "title1": "title 1",
+  "title2": "title 2",
+  "title3": "title 3",
+  "title4": "title 4",
+  "title5": "title 5",
+  "setting": "setting"
 }

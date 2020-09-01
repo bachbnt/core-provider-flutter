@@ -7,17 +7,18 @@ class AuthService {
   }
 
   Future<bool> signIn(String email, String password) async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future<dynamic>.delayed(const Duration(seconds: 1));
     return true;
   }
 
-  Future<bool> signUp(String email, String password, String firstName, String lastName) async {
-    await Future.delayed(const Duration(seconds: 3));
+  Future<bool> signUp(
+      String email, String password, String firstName, String lastName) async {
+    await Future<dynamic>.delayed(const Duration(seconds: 1));
     return true;
   }
 
   Future<bool> resetPassword(String email) async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future<dynamic>.delayed(const Duration(seconds: 1));
     return true;
   }
 }

@@ -1,5 +1,4 @@
 import 'package:bach_flutter_app/app_localizations.dart';
-import 'package:bach_flutter_app/constants/enums.dart';
 import 'package:bach_flutter_app/view_models/main_model.dart';
 import 'package:bach_flutter_app/views/base_view.dart';
 import 'package:bach_flutter_app/views/fifth_view.dart';
@@ -18,47 +17,52 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  final _key = GlobalKey<ScaffoldState>();
+  final GlobalKey _key = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return BaseView<MainModel>(
         model: MainModel(),
-        onModelReady: (model) {},
-        builder: (context, model, _) => Scaffold(
-              key: _key,
-              appBar: AppBar(
-                centerTitle: true,
-                title: Text(
-                    '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${model.currentTitle}'))}'),
-              ),
-              drawer: AppDrawer(
-                callback: (view) {
-                  model.navigateView(view);
-                  Navigator.of(context).pop();
-                },
-              ),
+        onModelReady: (MainModel model) {
+          model.initCurrentUser();
+        },
+        builder: (BuildContext context, MainModel model, _) {
+          return Scaffold(
+            key: _key,
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(
+                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${model.currentTitle}'))}'),
+            ),
+            drawer: AppDrawer(
+              currentUser: model.currentUser,
+              callback: (MainViewChild view) {
+                model.navigateView(view);
+                Navigator.of(context).pop();
+              },
+            ),
 //              bottomNavigationBar: AppBottomNavigation(
 //                callback: (view) => model.navigateView(view),
 //              ),
-              body: _buildView(model.currentView, null),
-            ));
+            body: _buildView(model.currentView, null),
+          );
+        });
   }
 
-  Widget _buildView(MainViewChild view, var args) {
+  Widget _buildView(MainViewChild view, dynamic arguments) {
     switch (view) {
       case MainViewChild.MainView1:
-        return FirstView(args);
+        return FirstView(arguments);
       case MainViewChild.MainView2:
-        return SecondView(args);
+        return SecondView(arguments);
       case MainViewChild.MainView3:
-        return ThirdView(args);
+        return ThirdView(arguments);
       case MainViewChild.MainView4:
-        return FourthView(args);
+        return FourthView(arguments);
       case MainViewChild.MainView5:
-        return FifthView(args);
+        return FifthView(arguments);
       default:
-        return FirstView(args);
+        return FirstView(arguments);
     }
   }
 }

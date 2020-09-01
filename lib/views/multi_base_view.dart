@@ -1,54 +1,55 @@
 import 'package:bach_flutter_app/view_models/base_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
-class MultiBaseView<T extends BaseModel, V extends ChangeNotifier>
+class MultiBaseView<T extends BaseModel, V extends BaseModel>
     extends StatefulWidget {
-  final Widget Function(BuildContext context, T model, V model2, Widget child)
-      builder;
-  final T model;
-  final V model2;
-  final Widget child;
-  final Function(T) onModelReady;
-  final Function(T) onModelDestroy;
-
   MultiBaseView(
       {this.builder,
-      this.model,
+      this.model1,
       this.model2,
       this.child,
       this.onModelReady,
       this.onModelDestroy});
 
+  final Widget Function(BuildContext context, T model1, V model2, Widget child)
+      builder;
+  final T model1;
+  final V model2;
+  final Widget child;
+  final Function(T, V) onModelReady;
+  final Function(T, V) onModelDestroy;
+
   @override
   _MultiBaseViewState<T, V> createState() => _MultiBaseViewState<T, V>();
 }
 
-class _MultiBaseViewState<T extends BaseModel, V extends ChangeNotifier>
+class _MultiBaseViewState<T extends BaseModel, V extends BaseModel>
     extends State<MultiBaseView<T, V>> {
-  T model;
+  T model1;
   V model2;
 
   @override
   void initState() {
-    model = widget.model;
+    model1 = widget.model1;
     model2 = widget.model2;
-    if (widget.onModelReady != null) widget.onModelReady(model);
+    if (widget.onModelReady != null) widget.onModelReady(model1, model2);
     super.initState();
   }
 
   @override
   void dispose() {
-    if (widget.onModelDestroy != null) widget.onModelDestroy(model);
+    if (widget.onModelDestroy != null) widget.onModelDestroy(model1, model2);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
+      providers: <SingleChildWidget>[
         ChangeNotifierProvider<T>(
-          create: (_) => model,
+          create: (_) => model1,
         ),
         ChangeNotifierProvider<V>(
           create: (_) => model2,

@@ -28,10 +28,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
     ScreenUtils.init(context);
 
     return MultiBaseView<ForgotPasswordModel, ValidationModel>(
-      model: ForgotPasswordModel(),
+      model1: ForgotPasswordModel(),
       model2: ValidationModel(),
-      onModelReady: (model) async {},
-      builder: (context, forgotPasswordModel, validationModel, _) => Scaffold(
+      onModelReady: (_,__) async {},
+      builder: (BuildContext context,ForgotPasswordModel forgotPasswordModel,ValidationModel validationModel, _) => Scaffold(
         key: _key,
         body: _buildView(context, forgotPasswordModel, validationModel),
       ),

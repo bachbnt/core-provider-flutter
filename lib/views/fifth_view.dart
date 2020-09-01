@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FifthView extends StatefulWidget {
-  final args;
+  FifthView(this.arguments);
 
-  FifthView(this.args);
+  final dynamic arguments;
 
   @override
   _FifthViewState createState() => _FifthViewState();

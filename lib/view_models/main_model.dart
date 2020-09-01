@@ -1,48 +1,64 @@
-import 'package:bach_flutter_app/constants/enums.dart';
+import 'package:bach_flutter_app/models/user.dart';
+import 'package:bach_flutter_app/services/repository.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+
+enum MainViewChild { MainView1, MainView2, MainView3, MainView4, MainView5 }
+
+const List<String> mainViewTitles = <String>[
+  'title1',
+  'title2',
+  'title3',
+  'title3',
+  'title5'
+];
+
+const List<IconData> mainViewIcons = <IconData>[
+  FontAwesome.google,
+  FontAwesome.google,
+  FontAwesome.google,
+  FontAwesome.google,
+  FontAwesome.google,
+  Icons.settings,
+  Icons.exit_to_app
+];
 
 class MainModel extends BaseModel {
-  static List<String> _titles = [
-    'title1',
-    'title2',
-    'title3',
-    'title3',
-    'title5'
-  ];
+  MainViewChild currentView = MainViewChild.MainView1;
+  String currentTitle = mainViewTitles[0];
+  final Repository _repository = Repository.instance;
+  User currentUser;
 
-  MainViewChild _currentView = MainViewChild.MainView1;
-  String _currentTitle = _titles[0];
+  void initCurrentUser() => currentUser = _repository.currentUser;
 
-  MainViewChild get currentView => _currentView;
-
-  String get currentTitle => _currentTitle;
-
-  void navigateView(MainViewChild view) {
-    if (view == _currentView) return;
-    _currentView = view;
+  void navigateView(MainViewChild newView) {
+    if (newView == currentView) return;
+    currentView = newView;
     _changeAppBarTitle();
     notifyListeners();
   }
 
   void _changeAppBarTitle() {
-    switch (_currentView) {
+    switch (currentView) {
       case MainViewChild.MainView1:
-        _currentTitle = _titles[0];
+        currentTitle = mainViewTitles[0];
         break;
       case MainViewChild.MainView2:
-        _currentTitle = _titles[1];
+        currentTitle = mainViewTitles[1];
         break;
       case MainViewChild.MainView3:
-        _currentTitle = _titles[2];
+        currentTitle = mainViewTitles[2];
         break;
       case MainViewChild.MainView4:
-        _currentTitle = _titles[3];
+        currentTitle = mainViewTitles[3];
         break;
       case MainViewChild.MainView5:
-        _currentTitle = _titles[4];
+        currentTitle = mainViewTitles[4];
         break;
       default:
-        _currentTitle = _titles[0];
+        currentTitle = mainViewTitles[0];
         break;
     }
   }

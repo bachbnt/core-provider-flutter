@@ -1,3 +1,4 @@
+import 'package:bach_flutter_app/models/user.dart';
 import 'package:bach_flutter_app/services/auth_service.dart';
 import 'package:bach_flutter_app/services/repository.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
@@ -13,17 +14,22 @@ class SignInModel extends BaseModel {
   Future<bool> signIn() async {
     setState(ViewState.Busy);
     try {
-      bool success = await _authService.signIn(email, password);
+      final bool success = await _authService.signIn(email, password);
       setState(ViewState.Idle);
-      if (success)
-        CustomToast.showSuccessToast('Success');
+      if (success){
+        _repository.initUser(User(firstName: 'bach', lastName: 'bui', email: 'fdsf@gmail.com'));
+        CustomToast.showCustomToast(
+            message: 'Success', toastType: ToastType.Success);
+      }
       else
-        CustomToast.showFailureToast('Failure');
+        CustomToast.showCustomToast(
+            message: 'Failure', toastType: ToastType.Failure);
       return success;
     } catch (e) {
       error = e.toString();
       setState(ViewState.Idle);
-      CustomToast.showFailureToast('Failure $error');
+      CustomToast.showCustomToast(
+          message: 'Failure $error', toastType: ToastType.Failure);
       return false;
     }
   }
