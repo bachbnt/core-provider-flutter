@@ -7,7 +7,9 @@ class AppColors {
   static const Color failureColor = Colors.red;
   static const Color whiteColor = Colors.white;
   static const Color blackColor = Colors.black;
+  static const Color greyColor = Colors.grey;
 
+  static const Color primaryColor = Colors.grey;
   static const Color primaryLightColor = Colors.white;
   static const Color primaryDarkColor = Colors.black;
 }

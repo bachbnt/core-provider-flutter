@@ -1,4 +1,6 @@
 import 'package:bach_flutter_app/app_localizations.dart';
+import 'package:bach_flutter_app/constants/app_images.dart';
+import 'package:bach_flutter_app/constants/app_strings.dart';
 import 'package:bach_flutter_app/constants/definitions.dart';
 import 'package:bach_flutter_app/view_models/main_model.dart';
 import 'package:flutter/material.dart';
@@ -17,31 +19,30 @@ class AppBottomNavigation extends StatefulWidget {
 class _AppBottomNavigationState extends State<AppBottomNavigation> {
   int _selectedIndex = 0;
 
-
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: Icon(mainViewIcons[0]),
-            title: Text(toBeginningOfSentenceCase(
-                AppLocalizations.of(context).translate(mainViewTitles[0])))),
+            icon: const Icon(AppImages.main1Icon),
+            title: Text(toBeginningOfSentenceCase(AppLocalizations.of(context)
+                .translate(AppStrings.main1Title)))),
         BottomNavigationBarItem(
-            icon: Icon(mainViewIcons[1]),
-            title: Text(toBeginningOfSentenceCase(
-                AppLocalizations.of(context).translate(mainViewTitles[1])))),
+            icon: const Icon(AppImages.main2Icon),
+            title: Text(toBeginningOfSentenceCase(AppLocalizations.of(context)
+                .translate(AppStrings.main2Title)))),
         BottomNavigationBarItem(
-            icon: Icon(mainViewIcons[2]),
-            title: Text(toBeginningOfSentenceCase(
-                AppLocalizations.of(context).translate(mainViewTitles[2])))),
+            icon: const Icon(AppImages.main3Icon),
+            title: Text(toBeginningOfSentenceCase(AppLocalizations.of(context)
+                .translate(AppStrings.main3Title)))),
         BottomNavigationBarItem(
-            icon: Icon(mainViewIcons[3]),
-            title: Text(toBeginningOfSentenceCase(
-                AppLocalizations.of(context).translate(mainViewTitles[3])))),
+            icon: const Icon(AppImages.main4Icon),
+            title: Text(toBeginningOfSentenceCase(AppLocalizations.of(context)
+                .translate(AppStrings.main4Title)))),
         BottomNavigationBarItem(
-            icon: Icon(mainViewIcons[4]),
-            title: Text(toBeginningOfSentenceCase(
-                AppLocalizations.of(context).translate(mainViewTitles[4])))),
+            icon: const Icon(AppImages.main5Icon),
+            title: Text(toBeginningOfSentenceCase(AppLocalizations.of(context)
+                .translate(AppStrings.main5Title)))),
       ],
       currentIndex: _selectedIndex,
       onTap: (int index) {
@@ -63,8 +64,6 @@ class _AppBottomNavigationState extends State<AppBottomNavigation> {
             case 4:
               widget.callback(MainViewChild.MainView5);
               break;
-            default:
-              widget.callback(MainViewChild.MainView1);
           }
         });
       },

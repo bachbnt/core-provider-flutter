@@ -8,7 +8,7 @@ import 'package:bach_flutter_app/view_models/forgot_password_model.dart';
 import 'package:bach_flutter_app/view_models/validation_model.dart';
 import 'package:bach_flutter_app/views/multi_base_view.dart';
 import 'package:bach_flutter_app/widgets/custom_flat_button.dart';
-import 'package:bach_flutter_app/widgets/custom_progress_indicator.dart';
+import 'package:bach_flutter_app/widgets/app_progress_indicator.dart';
 import 'package:bach_flutter_app/widgets/custom_raised_button.dart';
 import 'package:bach_flutter_app/widgets/custom_text_field.dart';
 import 'package:bach_flutter_app/widgets/orientation_switch.dart';
@@ -25,7 +25,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtils.init(context);
+    ScreenUtil.init(context);
 
     return MultiBaseView<ForgotPasswordModel, ValidationModel>(
       model1: ForgotPasswordModel(),
@@ -45,18 +45,18 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(
-            left: ScreenUtils.screenWidth / 24,
-            right: ScreenUtils.screenWidth / 24),
+            left: ScreenUtil.screenWidth / 24,
+            right: ScreenUtil.screenWidth / 24),
         child: OrientationSwitch(
           children: [
             SizedBox(
-                width: ScreenUtils.orientation == Orientation.portrait
-                    ? ScreenUtils.screenHeight / 2
-                    : ScreenUtils.screenWidth / 2,
-                child: Image(image: AssetImage(AppImages.logo))),
+                width: ScreenUtil.orientation == Orientation.portrait
+                    ? ScreenUtil.screenHeight / 2
+                    : ScreenUtil.screenWidth / 2,
+                child: Image(image: AssetImage(AppImages.logoImage))),
             Expanded(
               child: forgotPasswordModel.viewState == ViewState.Busy
-                  ? CustomProgressIndicator()
+                  ? AppProgressIndicator()
                   : Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

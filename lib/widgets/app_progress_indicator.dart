@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CustomProgressIndicator extends StatelessWidget {
+class AppProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: CircularProgressIndicator(),
     );
   }

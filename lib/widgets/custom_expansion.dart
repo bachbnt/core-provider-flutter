@@ -2,11 +2,6 @@ import 'package:bach_flutter_app/constants/definitions.dart';
 import 'package:flutter/material.dart';
 
 class CustomExpansion extends StatefulWidget {
-  final Widget header;
-  List<Widget> children;
-  int itemCount;
-  IndexedItemBuilder itemBuilder;
-
   CustomExpansion(
       {Key key, @required this.header, this.children = const <Widget>[]})
       : super(key: key);
@@ -17,6 +12,11 @@ class CustomExpansion extends StatefulWidget {
       @required this.itemCount,
       @required this.itemBuilder})
       : super(key: key);
+
+  final Widget header;
+  List<Widget> children;
+  int itemCount;
+  IndexedItemBuilder itemBuilder;
 
   @override
   _CustomExpansionState createState() => _CustomExpansionState();

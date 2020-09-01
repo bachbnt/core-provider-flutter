@@ -1,3 +1,5 @@
+import 'package:bach_flutter_app/services/repository.dart';
+
 class AuthService {
   static AuthService _instance;
 
@@ -5,6 +7,8 @@ class AuthService {
     if (_instance == null) _instance = AuthService();
     return _instance;
   }
+
+  final Repository _repository = Repository.instance;
 
   Future<bool> signIn(String email, String password) async {
     await Future<dynamic>.delayed(const Duration(seconds: 1));

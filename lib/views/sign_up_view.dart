@@ -7,7 +7,7 @@ import 'package:bach_flutter_app/view_models/base_model.dart';
 import 'package:bach_flutter_app/view_models/sign_up_model.dart';
 import 'package:bach_flutter_app/view_models/validation_model.dart';
 import 'package:bach_flutter_app/views/multi_base_view.dart';
-import 'package:bach_flutter_app/widgets/custom_progress_indicator.dart';
+import 'package:bach_flutter_app/widgets/app_progress_indicator.dart';
 import 'package:bach_flutter_app/widgets/custom_raised_button.dart';
 import 'package:bach_flutter_app/widgets/custom_text_field.dart';
 import 'package:bach_flutter_app/widgets/orientation_switch.dart';
@@ -24,7 +24,7 @@ class _SignUpViewState extends State<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtils.init(context);
+    ScreenUtil.init(context);
 
     return MultiBaseView<SignUpModel, ValidationModel>(
       model1: SignUpModel(),
@@ -44,18 +44,18 @@ class _SignUpViewState extends State<SignUpView> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(
-            left: ScreenUtils.screenWidth / 24,
-            right: ScreenUtils.screenWidth / 24),
+            left: ScreenUtil.screenWidth / 24,
+            right: ScreenUtil.screenWidth / 24),
         child: OrientationSwitch(
           children: <Widget>[
             SizedBox(
-                width: ScreenUtils.orientation == Orientation.portrait
-                    ? ScreenUtils.screenHeight / 2
-                    : ScreenUtils.screenWidth / 2,
-                child: Image.asset(AppImages.logo)),
+                width: ScreenUtil.orientation == Orientation.portrait
+                    ? ScreenUtil.screenHeight / 2
+                    : ScreenUtil.screenWidth / 2,
+                child: Image.asset(AppImages.logoImage)),
             Expanded(
               child: signUpModel.viewState == ViewState.Busy
-                  ? CustomProgressIndicator()
+                  ? AppProgressIndicator()
                   : Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -114,7 +114,7 @@ class _SignUpViewState extends State<SignUpView> {
                           controller: TextEditingController(
                               text: validationModel.confirmationPassword.value),
                           onChanged: (value) {
-                            signUpModel.confirmPassword = value.trim();
+                            signUpModel.confirmationPassword = value.trim();
                             validationModel
                                 .onConfirmationPasswordChanged(value.trim());
                           },
@@ -132,7 +132,7 @@ class _SignUpViewState extends State<SignUpView> {
                                     signUpModel.lastName,
                                     signUpModel.password,
                                     signUpModel
-                                        .confirmPassword)) if (await signUpModel
+                                        .confirmationPassword)) if (await signUpModel
                                     .signUp())
                                   Navigator.of(context)
                                       .pushReplacementNamed(signInRoute);

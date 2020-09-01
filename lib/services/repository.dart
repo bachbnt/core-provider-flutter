@@ -8,11 +8,5 @@ class Repository {
     return _instance;
   }
 
-  User _currentUser;
-
-  User get currentUser => _currentUser;
-
-  void initUser(User user) {
-    _currentUser = user;
-  }
+  User currentUser;
 }

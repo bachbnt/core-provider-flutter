@@ -9,7 +9,7 @@ class User {
       this.dateOfBirth,
       this.address,
       this.avatar,
-      this.cover});
+      this.coverPhoto});
 
   final String uid;
   final String firstName;
@@ -20,5 +20,5 @@ class User {
   final DateTime dateOfBirth;
   final String address;
   final String avatar;
-  final String cover;
+  final String coverPhoto;
 }

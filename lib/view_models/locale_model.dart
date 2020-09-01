@@ -6,7 +6,7 @@ const List<Locale> supportedLocales = <Locale>[
   Locale('vi')
 ];
 
-const List<AppLocale> appLocales = [
+const List<AppLocale> appLocales = <AppLocale>[
   AppLocale.English,
   AppLocale.Chinese,
   AppLocale.Vietnamese

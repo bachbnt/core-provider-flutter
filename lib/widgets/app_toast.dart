@@ -5,8 +5,8 @@ import 'package:oktoast/oktoast.dart';
 
 enum ToastType { Success, Warning, Failure }
 
-class CustomToast {
-  static void showCustomToast(
+class AppToast {
+  static void show(
       {@required String message, @required ToastType toastType}) {
     Color toastColor;
     switch (toastType) {

@@ -11,24 +11,18 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class SettingView extends StatefulWidget {
-
   @override
   _SettingViewState createState() => _SettingViewState();
 }
 
 class _SettingViewState extends State<SettingView> {
-  List<String> accList = [
-    "blocked users",
-    "change password",
-    "deactivate account"
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BaseView<SettingModel>(
         model: SettingModel(),
-        builder: (BuildContext context,SettingModel model, _) => _buildView(context, model),
+        builder: (BuildContext context, SettingModel model, _) =>
+            _buildView(context, model),
       ),
     );
   }
@@ -39,8 +33,7 @@ class _SettingViewState extends State<SettingView> {
         SwitchListTile(
           title: Text(
               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.darkMode))}'),
-          value:
-              Provider.of<ThemeModel>(context).appTheme == AppTheme.Dark,
+          value: Provider.of<ThemeModel>(context).appTheme == AppTheme.Dark,
           onChanged: (bool value) {
             Provider.of<ThemeModel>(context, listen: false)
                 .toggleTheme(value ? AppTheme.Dark : AppTheme.Light);
@@ -48,12 +41,12 @@ class _SettingViewState extends State<SettingView> {
         ),
         CustomExpansion.builder(
           header: Text(
-              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('language'))}'),
+              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.language))}'),
           itemCount: supportedLocales.length,
-          itemBuilder: (index) {
+          itemBuilder: (int index) {
             return RadioListTile<dynamic>(
               title: Text(
-                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${model.list[index]}'))}'),
+                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(model.languages[index]))}'),
               value: appLocales[index],
               groupValue: Provider.of<LocaleModel>(context).appLocale,
               onChanged: (dynamic value) {
@@ -65,13 +58,13 @@ class _SettingViewState extends State<SettingView> {
         ),
         CustomExpansion.builder(
           header: Text(
-              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('account'))}'),
-          itemCount: accList.length,
+              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.option))}'),
+          itemCount: model.options.length,
           itemBuilder: (int index) {
             return ListTile(
               title: Text(
-                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${accList[index]}'))}'),
-              onTap: () => Navigator.of(context).pushNamed(mainRoute),
+                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(model.options[index]))}'),
+              onTap: () {},
             );
           },
         ),

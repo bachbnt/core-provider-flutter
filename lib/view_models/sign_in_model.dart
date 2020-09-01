@@ -1,8 +1,9 @@
+import 'package:bach_flutter_app/constants/app_strings.dart';
 import 'package:bach_flutter_app/models/user.dart';
 import 'package:bach_flutter_app/services/auth_service.dart';
 import 'package:bach_flutter_app/services/repository.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
-import 'package:bach_flutter_app/widgets/custom_toast.dart';
+import 'package:bach_flutter_app/widgets/app_toast.dart';
 
 class SignInModel extends BaseModel {
   final AuthService _authService = AuthService.instance;
@@ -16,20 +17,20 @@ class SignInModel extends BaseModel {
     try {
       final bool success = await _authService.signIn(email, password);
       setState(ViewState.Idle);
-      if (success){
-        _repository.initUser(User(firstName: 'bach', lastName: 'bui', email: 'fdsf@gmail.com'));
-        CustomToast.showCustomToast(
-            message: 'Success', toastType: ToastType.Success);
-      }
-      else
-        CustomToast.showCustomToast(
-            message: 'Failure', toastType: ToastType.Failure);
+      if (success) {
+        _repository.currentUser = User(
+            firstName: 'Bách', lastName: 'Bùi', email: 'bachbnt@gmail.com');
+        AppToast.show(
+            message: AppStrings.successMessage, toastType: ToastType.Success);
+      } else
+        AppToast.show(
+            message: AppStrings.failureMessage, toastType: ToastType.Failure);
       return success;
     } catch (e) {
       error = e.toString();
       setState(ViewState.Idle);
-      CustomToast.showCustomToast(
-          message: 'Failure $error', toastType: ToastType.Failure);
+      AppToast.show(
+          message: AppStrings.failureMessage, toastType: ToastType.Failure);
       return false;
     }
   }

@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 enum ViewState { Idle, Busy }
 
 class BaseModel extends ChangeNotifier {
-  ViewState _viewState = ViewState.Idle;
+  ViewState viewState = ViewState.Idle;
 
-  ViewState get viewState => _viewState;
-
-  void setState(ViewState viewState) {
-    _viewState = viewState;
+  void setState(ViewState newViewState) {
+    viewState = newViewState;
     notifyListeners();
   }
 }

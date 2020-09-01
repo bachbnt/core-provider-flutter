@@ -1,6 +1,7 @@
+import 'package:bach_flutter_app/constants/app_strings.dart';
 import 'package:bach_flutter_app/services/auth_service.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
-import 'package:bach_flutter_app/widgets/custom_toast.dart';
+import 'package:bach_flutter_app/widgets/app_toast.dart';
 
 class SignUpModel extends BaseModel {
   final AuthService _authService = AuthService.instance;
@@ -8,7 +9,7 @@ class SignUpModel extends BaseModel {
   String firstName;
   String lastName;
   String password;
-  String confirmPassword;
+  String confirmationPassword;
   String error;
 
   Future<bool> signUp() async {
@@ -18,17 +19,17 @@ class SignUpModel extends BaseModel {
           await _authService.signUp(email, password, firstName, lastName);
       setState(ViewState.Idle);
       if (success)
-        CustomToast.showCustomToast(
-            message: 'Success', toastType: ToastType.Success);
+        AppToast.show(
+            message: AppStrings.successMessage, toastType: ToastType.Success);
       else
-        CustomToast.showCustomToast(
-            message: 'Failure', toastType: ToastType.Failure);
+        AppToast.show(
+            message: AppStrings.failureMessage, toastType: ToastType.Failure);
       return success;
     } catch (e) {
       error = e.toString();
       setState(ViewState.Idle);
-      CustomToast.showCustomToast(
-          message: 'Failure $error', toastType: ToastType.Failure);
+      AppToast.show(
+          message: AppStrings.failureMessage, toastType: ToastType.Failure);
       return false;
     }
   }

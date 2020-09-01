@@ -4,6 +4,6 @@ import 'package:flutter/material.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Configure.appFlavor = Flavor.DEV;
+  Configure.appFlavor = Flavor.STAGING;
   runApp(FlutterApp());
 }
