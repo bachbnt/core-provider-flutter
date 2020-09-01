@@ -1,0 +1,21 @@
+{
+  "email": "email",
+  "password": "password",
+  "confirm password": "confirm password",
+  "first name": "first name",
+  "last name": "last name",
+  "phone": "phone",
+  "birthday": "birthday",
+  "gender": "gender",
+  "address": "address",
+  "sign in": "sign in",
+  "sign up": "sign up",
+  "sign out": "sign out",
+  "forgot password": "forgot password",
+  "dark mode": "dark mode",
+  "language": "language",
+  "english": "english",
+  "vietnamese": "vietnamese",
+  "back": "back",
+  "confirm": "confirm"
+}

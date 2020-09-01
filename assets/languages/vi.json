@@ -1,0 +1,21 @@
+{
+  "email": "email",
+  "password": "mật khẩu",
+  "confirm password": "xác nhận mật khẩu",
+  "first name": "tên",
+  "last name": "họ",
+  "phone": "số điện thoại",
+  "birthday": "ngày sinh",
+  "gender": "giới tính",
+  "address": "địa chỉ",
+  "sign in": "đăng nhập",
+  "sign up": "đăng ký",
+  "sign out": "đăng xuất",
+  "forgot password": "quên mật khẩu",
+  "dark mode": "chế độ tối",
+  "language": "ngôn ngữ",
+  "english": "tiếng anh",
+  "vietnamese": "tiếng việt",
+  "back": "trở về",
+  "confirm": "confirm"
+}

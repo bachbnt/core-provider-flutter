@@ -1,0 +1,64 @@
+import 'package:bach_flutter_app/app_localizations.dart';
+import 'package:bach_flutter_app/constants/enums.dart';
+import 'package:bach_flutter_app/view_models/main_model.dart';
+import 'package:bach_flutter_app/views/base_view.dart';
+import 'package:bach_flutter_app/views/fifth_view.dart';
+import 'package:bach_flutter_app/views/first_view.dart';
+import 'package:bach_flutter_app/views/fourth_view.dart';
+import 'package:bach_flutter_app/views/second_view.dart';
+import 'package:bach_flutter_app/views/third_view.dart';
+import 'package:bach_flutter_app/widgets/app_bottom_navigation.dart';
+import 'package:bach_flutter_app/widgets/app_drawer.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+class MainView extends StatefulWidget {
+  @override
+  _MainViewState createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  final _key = GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseView<MainModel>(
+        model: MainModel(),
+        onModelReady: (model) {},
+        builder: (context, model, _) => Scaffold(
+              key: _key,
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text(
+                    '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${model.currentTitle}'))}'),
+              ),
+              drawer: AppDrawer(
+                callback: (view) {
+                  model.navigateView(view);
+                  Navigator.of(context).pop();
+                },
+              ),
+//              bottomNavigationBar: AppBottomNavigation(
+//                callback: (view) => model.navigateView(view),
+//              ),
+              body: _buildView(model.currentView, null),
+            ));
+  }
+
+  Widget _buildView(MainViewChild view, var args) {
+    switch (view) {
+      case MainViewChild.MainView1:
+        return FirstView(args);
+      case MainViewChild.MainView2:
+        return SecondView(args);
+      case MainViewChild.MainView3:
+        return ThirdView(args);
+      case MainViewChild.MainView4:
+        return FourthView(args);
+      case MainViewChild.MainView5:
+        return FifthView(args);
+      default:
+        return FirstView(args);
+    }
+  }
+}
