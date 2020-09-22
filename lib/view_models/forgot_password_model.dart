@@ -1,7 +1,7 @@
 import 'package:bach_flutter_app/constants/app_strings.dart';
 import 'package:bach_flutter_app/services/auth_service.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
-import 'package:bach_flutter_app/widgets/app_toast.dart';
+import 'package:bach_flutter_app/widgets/material/app_toast.dart';
 
 class ForgotPasswordModel extends BaseModel {
   final AuthService _authService = AuthService.instance;

@@ -5,7 +5,7 @@ import 'package:bach_flutter_app/view_models/locale_model.dart';
 import 'package:bach_flutter_app/view_models/setting_model.dart';
 import 'package:bach_flutter_app/view_models/theme_model.dart';
 import 'package:bach_flutter_app/views/base_view.dart';
-import 'package:bach_flutter_app/widgets/custom_expansion.dart';
+import 'package:bach_flutter_app/widgets/material/custom_expansion.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -44,12 +44,12 @@ class _SettingViewState extends State<SettingView> {
               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.language))}'),
           itemCount: supportedLocales.length,
           itemBuilder: (int index) {
-            return RadioListTile<dynamic>(
+            return RadioListTile<AppLocale>(
               title: Text(
                   '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(model.languages[index]))}'),
               value: appLocales[index],
               groupValue: Provider.of<LocaleModel>(context).appLocale,
-              onChanged: (dynamic value) {
+              onChanged: (AppLocale value) {
                 Provider.of<LocaleModel>(context, listen: false)
                     .toggleLocale(value);
               },

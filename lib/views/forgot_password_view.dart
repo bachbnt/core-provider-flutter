@@ -2,15 +2,15 @@ import 'package:bach_flutter_app/app_localizations.dart';
 import 'package:bach_flutter_app/app_router.dart';
 import 'package:bach_flutter_app/constants/app_strings.dart';
 import 'package:bach_flutter_app/constants/app_images.dart';
-import 'package:bach_flutter_app/utils/screen_util.dart';
+import 'package:bach_flutter_app/helpers/screen_helper.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
 import 'package:bach_flutter_app/view_models/forgot_password_model.dart';
 import 'package:bach_flutter_app/view_models/validation_model.dart';
 import 'package:bach_flutter_app/views/multi_base_view.dart';
-import 'package:bach_flutter_app/widgets/custom_flat_button.dart';
-import 'package:bach_flutter_app/widgets/app_progress_indicator.dart';
-import 'package:bach_flutter_app/widgets/custom_raised_button.dart';
-import 'package:bach_flutter_app/widgets/custom_text_field.dart';
+import 'package:bach_flutter_app/widgets/material/custom_flat_button.dart';
+import 'package:bach_flutter_app/widgets/material/app_progress_indicator.dart';
+import 'package:bach_flutter_app/widgets/material/custom_raised_button.dart';
+import 'package:bach_flutter_app/widgets/material/custom_text_field.dart';
 import 'package:bach_flutter_app/widgets/orientation_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -21,21 +21,22 @@ class ForgotPasswordView extends StatefulWidget {
 }
 
 class _ForgotPasswordViewState extends State<ForgotPasswordView> {
-  final _key = GlobalKey<ScaffoldState>();
+  final GlobalKey _key = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context);
+    ScreenHelper.init(context);
 
     return MultiBaseView<ForgotPasswordModel, ValidationModel>(
-      model1: ForgotPasswordModel(),
-      model2: ValidationModel(),
-      onModelReady: (_,__) async {},
-      builder: (BuildContext context,ForgotPasswordModel forgotPasswordModel,ValidationModel validationModel, _) => Scaffold(
-        key: _key,
-        body: _buildView(context, forgotPasswordModel, validationModel),
-      ),
-    );
+        model1: ForgotPasswordModel(),
+        model2: ValidationModel(),
+        builder: (BuildContext context, ForgotPasswordModel forgotPasswordModel,
+            ValidationModel validationModel, _) {
+          return Scaffold(
+            key: _key,
+            body: _buildView(context, forgotPasswordModel, validationModel),
+          );
+        });
   }
 
   Widget _buildView(
@@ -45,15 +46,15 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(
-            left: ScreenUtil.screenWidth / 24,
-            right: ScreenUtil.screenWidth / 24),
+            left: ScreenHelper.screenWidth / 24,
+            right: ScreenHelper.screenWidth / 24),
         child: OrientationSwitch(
-          children: [
+          children: <Widget>[
             SizedBox(
-                width: ScreenUtil.orientation == Orientation.portrait
-                    ? ScreenUtil.screenHeight / 2
-                    : ScreenUtil.screenWidth / 2,
-                child: Image(image: AssetImage(AppImages.logoImage))),
+                width: ScreenHelper.orientation == Orientation.portrait
+                    ? ScreenHelper.screenHeight / 2
+                    : ScreenHelper.screenWidth / 2,
+                child: const Image(image: AssetImage(AppImages.logoImage))),
             Expanded(
               child: forgotPasswordModel.viewState == ViewState.Busy
                   ? AppProgressIndicator()
@@ -61,21 +62,21 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: <Widget>[
                         CustomTextField(
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.email))}',
                           errorText: validationModel.email.error,
                           controller: TextEditingController(
                               text: validationModel.email.value),
-                          onChanged: (value) {
+                          onChanged: (String value) {
                             forgotPasswordModel.email = value;
                             validationModel.onEmailChanged(value);
                           },
                         ),
                         Column(
                           mainAxisSize: MainAxisSize.min,
-                          children: [
+                          children: <Widget>[
                             CustomRaisedButton(
                               title:
                                   '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.confirm))}',

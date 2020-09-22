@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ScreenUtil {
+class ScreenHelper {
   static MediaQueryData _mediaQueryData;
   static double screenWidth;
   static double screenHeight;

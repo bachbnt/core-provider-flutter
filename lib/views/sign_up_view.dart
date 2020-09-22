@@ -2,14 +2,15 @@ import 'package:bach_flutter_app/app_localizations.dart';
 import 'package:bach_flutter_app/app_router.dart';
 import 'package:bach_flutter_app/constants/app_strings.dart';
 import 'package:bach_flutter_app/constants/app_images.dart';
-import 'package:bach_flutter_app/utils/screen_util.dart';
+import 'package:bach_flutter_app/helpers/screen_helper.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
 import 'package:bach_flutter_app/view_models/sign_up_model.dart';
 import 'package:bach_flutter_app/view_models/validation_model.dart';
 import 'package:bach_flutter_app/views/multi_base_view.dart';
-import 'package:bach_flutter_app/widgets/app_progress_indicator.dart';
-import 'package:bach_flutter_app/widgets/custom_raised_button.dart';
-import 'package:bach_flutter_app/widgets/custom_text_field.dart';
+import 'package:bach_flutter_app/widgets/material/app_progress_indicator.dart';
+import 'package:bach_flutter_app/widgets/material/custom_flat_button.dart';
+import 'package:bach_flutter_app/widgets/material/custom_raised_button.dart';
+import 'package:bach_flutter_app/widgets/material/custom_text_field.dart';
 import 'package:bach_flutter_app/widgets/orientation_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -24,7 +25,7 @@ class _SignUpViewState extends State<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context);
+    ScreenHelper.init(context);
 
     return MultiBaseView<SignUpModel, ValidationModel>(
       model1: SignUpModel(),
@@ -44,15 +45,15 @@ class _SignUpViewState extends State<SignUpView> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(
-            left: ScreenUtil.screenWidth / 24,
-            right: ScreenUtil.screenWidth / 24),
+            left: ScreenHelper.screenWidth / 24,
+            right: ScreenHelper.screenWidth / 24),
         child: OrientationSwitch(
           children: <Widget>[
             SizedBox(
-                width: ScreenUtil.orientation == Orientation.portrait
-                    ? ScreenUtil.screenHeight / 2
-                    : ScreenUtil.screenWidth / 2,
-                child: Image.asset(AppImages.logoImage)),
+                width: ScreenHelper.orientation == Orientation.portrait
+                    ? ScreenHelper.screenHeight / 2
+                    : ScreenHelper.screenWidth / 2,
+                child: const Image(image: AssetImage(AppImages.logoImage))),
             Expanded(
               child: signUpModel.viewState == ViewState.Busy
                   ? AppProgressIndicator()
@@ -78,7 +79,7 @@ class _SignUpViewState extends State<SignUpView> {
                           errorText: validationModel.firstName.error,
                           controller: TextEditingController(
                               text: validationModel.firstName.value),
-                          onChanged: (value) {
+                          onChanged: (String value) {
                             signUpModel.firstName = value.trim();
                             validationModel.onFirstNameChanged(value.trim());
                           },
@@ -89,7 +90,7 @@ class _SignUpViewState extends State<SignUpView> {
                           errorText: validationModel.lastName.error,
                           controller: TextEditingController(
                               text: validationModel.lastName.value),
-                          onChanged: (value) {
+                          onChanged: (String value) {
                             signUpModel.lastName = value.trim();
                             validationModel.onLastNameChanged(value.trim());
                           },
@@ -101,7 +102,7 @@ class _SignUpViewState extends State<SignUpView> {
                           errorText: validationModel.password.error,
                           controller: TextEditingController(
                               text: validationModel.password.value),
-                          onChanged: (value) {
+                          onChanged: (String value) {
                             signUpModel.password = value.trim();
                             validationModel.onPasswordChanged(value.trim());
                           },
@@ -113,7 +114,7 @@ class _SignUpViewState extends State<SignUpView> {
                           errorText: validationModel.confirmationPassword.error,
                           controller: TextEditingController(
                               text: validationModel.confirmationPassword.value),
-                          onChanged: (value) {
+                          onChanged: (String value) {
                             signUpModel.confirmationPassword = value.trim();
                             validationModel
                                 .onConfirmationPasswordChanged(value.trim());
@@ -121,7 +122,7 @@ class _SignUpViewState extends State<SignUpView> {
                         ),
                         Column(
                           mainAxisSize: MainAxisSize.min,
-                          children: [
+                          children: <Widget>[
                             CustomRaisedButton(
                               title:
                                   '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.signUp))}',
@@ -138,9 +139,9 @@ class _SignUpViewState extends State<SignUpView> {
                                       .pushReplacementNamed(signInRoute);
                               },
                             ),
-                            FlatButton(
-                              child: Text(
-                                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.back))}'),
+                            CustomFlatButton(
+                              title:
+                                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.back))}',
                               onPressed: () => Navigator.of(context).pop(),
                             )
                           ],

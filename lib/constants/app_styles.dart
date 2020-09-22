@@ -1,7 +1,7 @@
 import 'package:bach_flutter_app/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class AppStyles {
+abstract class AppStyles {
   //normal white
   static TextStyle dynamicNormalWhite(double zoom) =>
       TextStyle(fontSize: 14 + zoom, color: AppColors.whiteColor);

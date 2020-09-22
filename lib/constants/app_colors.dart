@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AppColors {
+abstract class AppColors {
   static const Color successColor = Colors.green;
   static const Color warningColor = Colors.amber;
   static const Color failureColor = Colors.red;

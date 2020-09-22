@@ -2,39 +2,41 @@ import 'package:bach_flutter_app/app_localizations.dart';
 import 'package:bach_flutter_app/app_router.dart';
 import 'package:bach_flutter_app/constants/app_strings.dart';
 import 'package:bach_flutter_app/constants/app_images.dart';
-import 'package:bach_flutter_app/utils/screen_util.dart';
+import 'package:bach_flutter_app/helpers/screen_helper.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
 import 'package:bach_flutter_app/view_models/sign_in_model.dart';
 import 'package:bach_flutter_app/view_models/validation_model.dart';
 import 'package:bach_flutter_app/views/multi_base_view.dart';
-import 'package:bach_flutter_app/widgets/custom_flat_button.dart';
-import 'package:bach_flutter_app/widgets/app_progress_indicator.dart';
-import 'package:bach_flutter_app/widgets/custom_raised_button.dart';
-import 'package:bach_flutter_app/widgets/custom_text_field.dart';
+import 'package:bach_flutter_app/widgets/material/custom_flat_button.dart';
+import 'package:bach_flutter_app/widgets/material/app_progress_indicator.dart';
+import 'package:bach_flutter_app/widgets/material/custom_raised_button.dart';
+import 'package:bach_flutter_app/widgets/material/custom_text_field.dart';
 import 'package:bach_flutter_app/widgets/orientation_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class SignInView extends StatefulWidget {
+class MaterialSignInView extends StatefulWidget {
   @override
-  _SignInViewState createState() => _SignInViewState();
+  _MaterialSignInViewState createState() => _MaterialSignInViewState();
 }
 
-class _SignInViewState extends State<SignInView> {
-  final _key = GlobalKey<ScaffoldState>();
+class _MaterialSignInViewState extends State<MaterialSignInView> {
+  final GlobalKey _key = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context);
+    ScreenHelper.init(context);
+
     return MultiBaseView<SignInModel, ValidationModel>(
-      model1: SignInModel(),
-      model2: ValidationModel(),
-      onModelReady: (_, __) async {},
-      builder: (BuildContext context,SignInModel signInModel,ValidationModel validationModel, _) => Scaffold(
-        key: _key,
-        body: _buildView(context, signInModel, validationModel),
-      ),
-    );
+        model1: SignInModel(),
+        model2: ValidationModel(),
+        builder: (BuildContext context, SignInModel signInModel,
+            ValidationModel validationModel, _) {
+          return Scaffold(
+            key: _key,
+            body: _buildView(context, signInModel, validationModel),
+          );
+        });
   }
 
   Widget _buildView(BuildContext context, SignInModel signInModel,
@@ -42,15 +44,15 @@ class _SignInViewState extends State<SignInView> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(
-            left: ScreenUtil.screenWidth / 24,
-            right: ScreenUtil.screenWidth / 24),
+            left: ScreenHelper.screenWidth / 24,
+            right: ScreenHelper.screenWidth / 24),
         child: OrientationSwitch(
-          children: [
+          children: <Widget>[
             SizedBox(
-                width: ScreenUtil.orientation == Orientation.portrait
-                    ? ScreenUtil.screenHeight / 2
-                    : ScreenUtil.screenWidth / 2,
-                child: Image(image: AssetImage(AppImages.logoImage))),
+                width: ScreenHelper.orientation == Orientation.portrait
+                    ? ScreenHelper.screenHeight / 2
+                    : ScreenHelper.screenWidth / 2,
+                child: const Image(image: AssetImage(AppImages.logoImage))),
             Expanded(
               child: signInModel.viewState == ViewState.Busy
                   ? AppProgressIndicator()
@@ -58,20 +60,20 @@ class _SignInViewState extends State<SignInView> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: <Widget>[
                         CustomTextField(
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.email))}',
                           errorText: validationModel.email.error,
                           controller: TextEditingController(
                               text: validationModel.email.value),
-                          onChanged: (value) {
+                          onChanged: (String value) {
                             signInModel.email = value.trim();
                             validationModel.onEmailChanged(value.trim());
                           },
                         ),
                         SizedBox(
-                          height: ScreenUtil.screenHeight / 48,
+                          height: ScreenHelper.screenHeight / 48,
                         ),
                         CustomTextField(
                           obscureText: true,
@@ -80,7 +82,7 @@ class _SignInViewState extends State<SignInView> {
                           errorText: validationModel.password.error,
                           controller: TextEditingController(
                               text: validationModel.password.value),
-                          onChanged: (value) {
+                          onChanged: (String value) {
                             signInModel.password = value.trim();
                             validationModel.onPasswordChanged(value.trim());
                           },
@@ -95,7 +97,7 @@ class _SignInViewState extends State<SignInView> {
                           ),
                         ),
                         SizedBox(
-                          height: ScreenUtil.screenHeight / 12,
+                          height: ScreenHelper.screenHeight / 12,
                         ),
                         CustomRaisedButton(
                           title:
@@ -109,9 +111,9 @@ class _SignInViewState extends State<SignInView> {
                                   .pushReplacementNamed(mainRoute);
                           },
                         ),
-                        FlatButton(
-                          child: Text(
-                              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.signUp))}'),
+                        CustomFlatButton(
+                          title:
+                              '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.signUp))}',
                           onPressed: () =>
                               Navigator.of(context).pushNamed(signUpRoute),
                         )

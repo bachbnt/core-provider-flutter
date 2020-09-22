@@ -6,8 +6,8 @@ import 'package:bach_flutter_app/views/first_view.dart';
 import 'package:bach_flutter_app/views/fourth_view.dart';
 import 'package:bach_flutter_app/views/second_view.dart';
 import 'package:bach_flutter_app/views/third_view.dart';
-import 'package:bach_flutter_app/widgets/app_bottom_navigation.dart';
-import 'package:bach_flutter_app/widgets/app_drawer.dart';
+import 'package:bach_flutter_app/widgets/material/app_bottom_navigation.dart';
+import 'package:bach_flutter_app/widgets/material/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -32,18 +32,18 @@ class _MainViewState extends State<MainView> {
             appBar: AppBar(
               centerTitle: true,
               title: Text(
-                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate('${model.currentTitle}'))}'),
+                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(model.currentTitle))}'),
             ),
-            drawer: AppDrawer(
-              currentUser: model.currentUser,
-              callback: (MainViewChild view) {
-                model.navigateView(view);
-                Navigator.of(context).pop();
-              },
-            ),
-//              bottomNavigationBar: AppBottomNavigation(
-//                callback: (view) => model.navigateView(view),
-//              ),
+            // drawer: AppDrawer(
+            //   currentUser: model.currentUser,
+            //   callback: (MainViewChild view) {
+            //     model.navigateView(view);
+            //     Navigator.of(context).pop();
+            //   },
+            // ),
+             bottomNavigationBar: AppBottomNavigation(
+               callback: (view) => model.navigateView(view),
+             ),
             body: _buildView(model.currentView, null),
           );
         });

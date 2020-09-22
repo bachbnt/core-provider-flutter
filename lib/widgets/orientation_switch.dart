@@ -1,4 +1,4 @@
-import 'package:bach_flutter_app/utils/screen_util.dart';
+import 'package:bach_flutter_app/helpers/screen_helper.dart';
 import 'package:flutter/material.dart';
 
 class OrientationSwitch extends StatelessWidget {
@@ -17,12 +17,12 @@ class OrientationSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context);
+    ScreenHelper.init(context);
 
     return Container(
-      width: ScreenUtil.screenWidth,
-      height: ScreenUtil.screenHeight,
-      child: ScreenUtil.orientation == Orientation.portrait
+      width: ScreenHelper.screenWidth,
+      height: ScreenHelper.screenHeight,
+      child: ScreenHelper.orientation == Orientation.portrait
           ? Column(
               mainAxisSize: mainAxisSize,
               mainAxisAlignment: mainAxisAlignment,

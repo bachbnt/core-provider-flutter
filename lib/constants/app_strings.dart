@@ -1,4 +1,4 @@
-class AppStrings {
+abstract class AppStrings {
   //user information
   static const String email = 'email';
   static const String password = 'password';

@@ -1,8 +1,10 @@
+import 'package:bach_flutter_app/views/cupertino/cupertino_sign_in_view.dart';
 import 'package:bach_flutter_app/views/forgot_password_view.dart';
 import 'package:bach_flutter_app/views/main_view.dart';
-import 'package:bach_flutter_app/views/sign_in_view.dart';
+import 'package:bach_flutter_app/views/material_sign_in_view.dart';
 import 'package:bach_flutter_app/views/sign_up_view.dart';
 import 'package:bach_flutter_app/views/setting_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const String initialRoute = '/';
@@ -12,13 +14,13 @@ const String forgotPasswordRoute = '/forgot_password';
 const String mainRoute = '/main';
 const String settingRoute = '/setting';
 
-class AppRouter {
+class MaterialAppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case initialRoute:
-        return MaterialPageRoute<dynamic>(builder: (_) => SignInView());
+        return MaterialPageRoute<dynamic>(builder: (_) => MaterialSignInView());
       case signInRoute:
-        return MaterialPageRoute<dynamic>(builder: (_) => SignInView());
+        return MaterialPageRoute<dynamic>(builder: (_) => MaterialSignInView());
       case signUpRoute:
         return MaterialPageRoute<dynamic>(builder: (_) => SignUpView());
       case forgotPasswordRoute:
@@ -31,6 +33,38 @@ class AppRouter {
         return MaterialPageRoute<dynamic>(builder: (_) {
           return Scaffold(
             body: Center(
+              child: Text(
+                'No route defined for ${settings.name}',
+              ),
+            ),
+          );
+        });
+    }
+  }
+}
+
+class CupertinoAppRouter {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case initialRoute:
+        return CupertinoPageRoute<dynamic>(
+            builder: (_) => CupertinoSignInView());
+      case signInRoute:
+        return CupertinoPageRoute<dynamic>(
+            builder: (_) => CupertinoSignInView());
+      case signUpRoute:
+        return CupertinoPageRoute<dynamic>(builder: (_) => SignUpView());
+      case forgotPasswordRoute:
+        return CupertinoPageRoute<dynamic>(
+            builder: (_) => ForgotPasswordView());
+      case mainRoute:
+        return CupertinoPageRoute<dynamic>(builder: (_) => MainView());
+      case settingRoute:
+        return CupertinoPageRoute<dynamic>(builder: (_) => SettingView());
+      default:
+        return CupertinoPageRoute<dynamic>(builder: (_) {
+          return CupertinoPageScaffold(
+            child: Center(
               child: Text(
                 'No route defined for ${settings.name}',
               ),
