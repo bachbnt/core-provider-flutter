@@ -22,7 +22,7 @@ class OrientationSwitch extends StatelessWidget {
     return Container(
       width: ScreenHelper.screenWidth,
       height: ScreenHelper.screenHeight,
-      child: ScreenHelper.orientation == Orientation.portrait
+      child: ScreenHelper.isPortrait()
           ? Column(
               mainAxisSize: mainAxisSize,
               mainAxisAlignment: mainAxisAlignment,

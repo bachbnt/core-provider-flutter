@@ -3,7 +3,6 @@ import 'package:bach_flutter_app/models/user.dart';
 import 'package:bach_flutter_app/services/auth_service.dart';
 import 'package:bach_flutter_app/services/repository.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
-import 'package:bach_flutter_app/widgets/material/app_toast.dart';
 
 class SignInModel extends BaseModel {
   final AuthService _authService = AuthService.instance;
@@ -20,17 +19,14 @@ class SignInModel extends BaseModel {
       if (success) {
         _repository.currentUser = User(
             firstName: 'Bách', lastName: 'Bùi', email: 'bachbnt@gmail.com');
-        AppToast.show(
-            message: AppStrings.successMessage, toastType: ToastType.Success);
+        print(AppStrings.successMessage);
       } else
-        AppToast.show(
-            message: AppStrings.failureMessage, toastType: ToastType.Failure);
+        print(AppStrings.failureMessage);
       return success;
     } catch (e) {
       error = e.toString();
       setState(ViewState.Idle);
-      AppToast.show(
-          message: AppStrings.failureMessage, toastType: ToastType.Failure);
+      print(AppStrings.failureMessage);
       return false;
     }
   }

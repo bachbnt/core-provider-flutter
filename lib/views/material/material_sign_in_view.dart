@@ -6,11 +6,11 @@ import 'package:bach_flutter_app/helpers/screen_helper.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
 import 'package:bach_flutter_app/view_models/sign_in_model.dart';
 import 'package:bach_flutter_app/view_models/validation_model.dart';
-import 'package:bach_flutter_app/views/multi_base_view.dart';
-import 'package:bach_flutter_app/widgets/material/custom_flat_button.dart';
-import 'package:bach_flutter_app/widgets/material/app_progress_indicator.dart';
-import 'package:bach_flutter_app/widgets/material/custom_raised_button.dart';
-import 'package:bach_flutter_app/widgets/material/custom_text_field.dart';
+import 'package:bach_flutter_app/views/base_view_2.dart';
+import 'package:bach_flutter_app/widgets/material/android_flat_button.dart';
+import 'package:bach_flutter_app/widgets/material/android_progress_indicator.dart';
+import 'package:bach_flutter_app/widgets/material/android_raised_button.dart';
+import 'package:bach_flutter_app/widgets/material/android_text_field.dart';
 import 'package:bach_flutter_app/widgets/orientation_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -21,19 +21,19 @@ class MaterialSignInView extends StatefulWidget {
 }
 
 class _MaterialSignInViewState extends State<MaterialSignInView> {
-  final GlobalKey _key = GlobalKey<ScaffoldState>();
+  final GlobalKey _globalKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     ScreenHelper.init(context);
 
-    return MultiBaseView<SignInModel, ValidationModel>(
+    return BaseView2<SignInModel, ValidationModel>(
         model1: SignInModel(),
         model2: ValidationModel(),
         builder: (BuildContext context, SignInModel signInModel,
             ValidationModel validationModel, _) {
           return Scaffold(
-            key: _key,
+            key: _globalKey,
             body: _buildView(context, signInModel, validationModel),
           );
         });
@@ -49,19 +49,19 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
         child: OrientationSwitch(
           children: <Widget>[
             SizedBox(
-                width: ScreenHelper.orientation == Orientation.portrait
+                width: ScreenHelper.isPortrait()
                     ? ScreenHelper.screenHeight / 2
                     : ScreenHelper.screenWidth / 2,
                 child: const Image(image: AssetImage(AppImages.logoImage))),
             Expanded(
               child: signInModel.viewState == ViewState.Busy
-                  ? AppProgressIndicator()
+                  ? AndroidCircularProgress()
                   : Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        CustomTextField(
+                        AndroidTextField(
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.email))}',
                           errorText: validationModel.email.error,
@@ -75,7 +75,7 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
                         SizedBox(
                           height: ScreenHelper.screenHeight / 48,
                         ),
-                        CustomTextField(
+                        AndroidTextField(
                           obscureText: true,
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.password))}',
@@ -89,7 +89,7 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
                         ),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: CustomFlatButton(
+                          child: AndroidFlatButton(
                             title:
                                 '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.forgotPassword))}?',
                             onPressed: () => Navigator.of(context)
@@ -99,7 +99,7 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
                         SizedBox(
                           height: ScreenHelper.screenHeight / 12,
                         ),
-                        CustomRaisedButton(
+                        AndroidRaisedButton(
                           title:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.signIn))}',
                           onPressed: () async {
@@ -111,7 +111,7 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
                                   .pushReplacementNamed(mainRoute);
                           },
                         ),
-                        CustomFlatButton(
+                        AndroidFlatButton(
                           title:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.signUp))}',
                           onPressed: () =>

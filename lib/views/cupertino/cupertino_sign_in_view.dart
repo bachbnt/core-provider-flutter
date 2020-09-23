@@ -6,11 +6,11 @@ import 'package:bach_flutter_app/helpers/screen_helper.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
 import 'package:bach_flutter_app/view_models/sign_in_model.dart';
 import 'package:bach_flutter_app/view_models/validation_model.dart';
-import 'package:bach_flutter_app/views/multi_base_view.dart';
-import 'package:bach_flutter_app/widgets/material/custom_flat_button.dart';
-import 'package:bach_flutter_app/widgets/material/app_progress_indicator.dart';
-import 'package:bach_flutter_app/widgets/material/custom_raised_button.dart';
-import 'package:bach_flutter_app/widgets/material/custom_text_field.dart';
+import 'package:bach_flutter_app/views/base_view_2.dart';
+import 'package:bach_flutter_app/widgets/material/android_flat_button.dart';
+import 'package:bach_flutter_app/widgets/material/android_progress_indicator.dart';
+import 'package:bach_flutter_app/widgets/material/android_raised_button.dart';
+import 'package:bach_flutter_app/widgets/material/android_text_field.dart';
 import 'package:bach_flutter_app/widgets/orientation_switch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class _CupertinoSignInViewState extends State<CupertinoSignInView> {
   Widget build(BuildContext context) {
     ScreenHelper.init(context);
 
-    return MultiBaseView<SignInModel, ValidationModel>(
+    return BaseView2<SignInModel, ValidationModel>(
         model1: SignInModel(),
         model2: ValidationModel(),
         builder: (BuildContext context, SignInModel signInModel,
@@ -50,13 +50,13 @@ class _CupertinoSignInViewState extends State<CupertinoSignInView> {
         child: OrientationSwitch(
           children: <Widget>[
             SizedBox(
-                width: ScreenHelper.orientation == Orientation.portrait
+                width: ScreenHelper.isPortrait()
                     ? ScreenHelper.screenHeight / 2
                     : ScreenHelper.screenWidth / 2,
                 child: const Image(image: AssetImage(AppImages.logoImage))),
             Expanded(
               child: signInModel.viewState == ViewState.Busy
-                  ? AppProgressIndicator()
+                  ? AndroidCircularProgress()
                   : Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -74,7 +74,7 @@ class _CupertinoSignInViewState extends State<CupertinoSignInView> {
                           .pushReplacementNamed(mainRoute);
                     },
                   ),
-                  CustomFlatButton(
+                  AndroidFlatButton(
                     title:
                     '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.signUp))}',
                     onPressed: () =>

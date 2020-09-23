@@ -18,6 +18,7 @@ abstract class AppStrings {
   static const String signOut = 'sign out';
   static const String forgotPassword = 'forgot password';
   static const String back = 'back';
+  static const String cancel = 'cancel';
   static const String confirm = 'confirm';
   static const String setting = 'setting';
 

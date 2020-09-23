@@ -1,8 +1,9 @@
+import 'package:bach_flutter_app/views/cupertino/cupertino_main_view.dart';
 import 'package:bach_flutter_app/views/cupertino/cupertino_sign_in_view.dart';
-import 'package:bach_flutter_app/views/forgot_password_view.dart';
-import 'package:bach_flutter_app/views/main_view.dart';
-import 'package:bach_flutter_app/views/material_sign_in_view.dart';
-import 'package:bach_flutter_app/views/sign_up_view.dart';
+import 'package:bach_flutter_app/views/material/material_forgot_password_view.dart';
+import 'package:bach_flutter_app/views/material/material_main_view.dart';
+import 'package:bach_flutter_app/views/material/material_sign_in_view.dart';
+import 'package:bach_flutter_app/views/material/material_sign_up_view.dart';
 import 'package:bach_flutter_app/views/setting_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class MaterialAppRouter {
       case forgotPasswordRoute:
         return MaterialPageRoute<dynamic>(builder: (_) => ForgotPasswordView());
       case mainRoute:
-        return MaterialPageRoute<dynamic>(builder: (_) => MainView());
+        return MaterialPageRoute<dynamic>(builder: (_) => MaterialMainView());
       case settingRoute:
         return MaterialPageRoute<dynamic>(builder: (_) => SettingView());
       default:
@@ -58,7 +59,7 @@ class CupertinoAppRouter {
         return CupertinoPageRoute<dynamic>(
             builder: (_) => ForgotPasswordView());
       case mainRoute:
-        return CupertinoPageRoute<dynamic>(builder: (_) => MainView());
+        return CupertinoPageRoute<dynamic>(builder: (_) => CupertinoMainView());
       case settingRoute:
         return CupertinoPageRoute<dynamic>(builder: (_) => SettingView());
       default:

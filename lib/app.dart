@@ -4,7 +4,7 @@ import 'package:bach_flutter_app/configures/app_config.dart';
 import 'package:bach_flutter_app/view_models/locale_model.dart';
 import 'package:bach_flutter_app/view_models/theme_model.dart';
 import 'package:bach_flutter_app/views/cupertino/cupertino_sign_in_view.dart';
-import 'package:bach_flutter_app/views/material_sign_in_view.dart';
+import 'package:bach_flutter_app/views/material/material_sign_in_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -30,9 +30,14 @@ class FlutterApp extends StatelessWidget {
           child: Banner(
             message: AppConfig.flavorName,
             color: AppConfig.flavorColor,
-            location: BannerLocation.topEnd,
-            child:
-                PlatformApp(themeModel: themeModel, localeModel: localeModel),
+            location: BannerLocation.topStart,
+            child: Banner(
+              message: AppConfig.platformName,
+              color: AppConfig.platformColor,
+              location: BannerLocation.topEnd,
+              child:
+                  NativeApp(themeModel: themeModel, localeModel: localeModel),
+            ),
           ),
         );
       }),
@@ -40,19 +45,19 @@ class FlutterApp extends StatelessWidget {
   }
 }
 
-class PlatformApp extends StatelessWidget {
+class NativeApp extends StatelessWidget {
   final ThemeModel themeModel;
   final LocaleModel localeModel;
 
-  const PlatformApp({@required this.themeModel, @required this.localeModel});
+  const NativeApp({@required this.themeModel, @required this.localeModel});
 
   @override
   Widget build(BuildContext context) {
-    return _buildPlatformApp();
+    return _buildNativeApp();
   }
 
-  Widget _buildPlatformApp() {
-    if (AppConfig.isCupertino())
+  Widget _buildNativeApp() {
+    if (AppConfig.isIOS())
       return CupertinoApp(
         localizationsDelegates: <LocalizationsDelegate<dynamic>>[
           AppLocalizations.delegate,

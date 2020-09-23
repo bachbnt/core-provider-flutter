@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
-class MultiBaseView<T extends BaseModel, V extends BaseModel>
+class BaseView2<T extends BaseModel, V extends BaseModel>
     extends StatefulWidget {
-  MultiBaseView(
+  BaseView2(
       {this.builder,
       this.model1,
       this.model2,
@@ -22,11 +22,11 @@ class MultiBaseView<T extends BaseModel, V extends BaseModel>
   final Function(T, V) onModelDestroy;
 
   @override
-  _MultiBaseViewState<T, V> createState() => _MultiBaseViewState<T, V>();
+  _BaseView2State<T, V> createState() => _BaseView2State<T, V>();
 }
 
-class _MultiBaseViewState<T extends BaseModel, V extends BaseModel>
-    extends State<MultiBaseView<T, V>> {
+class _BaseView2State<T extends BaseModel, V extends BaseModel>
+    extends State<BaseView2<T, V>> {
   T model1;
   V model2;
 

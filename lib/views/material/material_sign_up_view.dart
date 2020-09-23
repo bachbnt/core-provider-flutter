@@ -6,11 +6,11 @@ import 'package:bach_flutter_app/helpers/screen_helper.dart';
 import 'package:bach_flutter_app/view_models/base_model.dart';
 import 'package:bach_flutter_app/view_models/sign_up_model.dart';
 import 'package:bach_flutter_app/view_models/validation_model.dart';
-import 'package:bach_flutter_app/views/multi_base_view.dart';
-import 'package:bach_flutter_app/widgets/material/app_progress_indicator.dart';
-import 'package:bach_flutter_app/widgets/material/custom_flat_button.dart';
-import 'package:bach_flutter_app/widgets/material/custom_raised_button.dart';
-import 'package:bach_flutter_app/widgets/material/custom_text_field.dart';
+import 'package:bach_flutter_app/views/base_view_2.dart';
+import 'package:bach_flutter_app/widgets/material/android_progress_indicator.dart';
+import 'package:bach_flutter_app/widgets/material/android_flat_button.dart';
+import 'package:bach_flutter_app/widgets/material/android_raised_button.dart';
+import 'package:bach_flutter_app/widgets/material/android_text_field.dart';
 import 'package:bach_flutter_app/widgets/orientation_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -27,7 +27,7 @@ class _SignUpViewState extends State<SignUpView> {
   Widget build(BuildContext context) {
     ScreenHelper.init(context);
 
-    return MultiBaseView<SignUpModel, ValidationModel>(
+    return BaseView2<SignUpModel, ValidationModel>(
       model1: SignUpModel(),
       model2: ValidationModel(),
       builder: (BuildContext context, SignUpModel signUpModel,
@@ -50,19 +50,19 @@ class _SignUpViewState extends State<SignUpView> {
         child: OrientationSwitch(
           children: <Widget>[
             SizedBox(
-                width: ScreenHelper.orientation == Orientation.portrait
+                width: ScreenHelper.isPortrait()
                     ? ScreenHelper.screenHeight / 2
                     : ScreenHelper.screenWidth / 2,
                 child: const Image(image: AssetImage(AppImages.logoImage))),
             Expanded(
               child: signUpModel.viewState == ViewState.Busy
-                  ? AppProgressIndicator()
+                  ? AndroidCircularProgress()
                   : Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        CustomTextField(
+                        AndroidTextField(
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.email))}',
                           errorText: validationModel.email.error,
@@ -73,7 +73,7 @@ class _SignUpViewState extends State<SignUpView> {
                             validationModel.onEmailChanged(value.trim());
                           },
                         ),
-                        CustomTextField(
+                        AndroidTextField(
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.firstName))}',
                           errorText: validationModel.firstName.error,
@@ -84,7 +84,7 @@ class _SignUpViewState extends State<SignUpView> {
                             validationModel.onFirstNameChanged(value.trim());
                           },
                         ),
-                        CustomTextField(
+                        AndroidTextField(
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.lastName))}',
                           errorText: validationModel.lastName.error,
@@ -95,7 +95,7 @@ class _SignUpViewState extends State<SignUpView> {
                             validationModel.onLastNameChanged(value.trim());
                           },
                         ),
-                        CustomTextField(
+                        AndroidTextField(
                           obscureText: true,
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.password))}',
@@ -107,7 +107,7 @@ class _SignUpViewState extends State<SignUpView> {
                             validationModel.onPasswordChanged(value.trim());
                           },
                         ),
-                        CustomTextField(
+                        AndroidTextField(
                           obscureText: true,
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.confirmationPassword))}',
@@ -123,7 +123,7 @@ class _SignUpViewState extends State<SignUpView> {
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            CustomRaisedButton(
+                            AndroidRaisedButton(
                               title:
                                   '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.signUp))}',
                               onPressed: () async {
@@ -139,7 +139,7 @@ class _SignUpViewState extends State<SignUpView> {
                                       .pushReplacementNamed(signInRoute);
                               },
                             ),
-                            CustomFlatButton(
+                            AndroidFlatButton(
                               title:
                                   '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.back))}',
                               onPressed: () => Navigator.of(context).pop(),

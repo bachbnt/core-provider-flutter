@@ -6,17 +6,17 @@ import 'package:bach_flutter_app/views/first_view.dart';
 import 'package:bach_flutter_app/views/fourth_view.dart';
 import 'package:bach_flutter_app/views/second_view.dart';
 import 'package:bach_flutter_app/views/third_view.dart';
-import 'package:bach_flutter_app/widgets/material/app_bottom_navigation.dart';
-import 'package:bach_flutter_app/widgets/material/app_drawer.dart';
+import 'package:bach_flutter_app/widgets/material/android_bottom_navigation.dart';
+import 'package:bach_flutter_app/widgets/material/android_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class MainView extends StatefulWidget {
+class MaterialMainView extends StatefulWidget {
   @override
-  _MainViewState createState() => _MainViewState();
+  _MaterialMainViewState createState() => _MaterialMainViewState();
 }
 
-class _MainViewState extends State<MainView> {
+class _MaterialMainViewState extends State<MaterialMainView> {
   final GlobalKey _key = GlobalKey<ScaffoldState>();
 
   @override
@@ -41,7 +41,7 @@ class _MainViewState extends State<MainView> {
             //     Navigator.of(context).pop();
             //   },
             // ),
-             bottomNavigationBar: AppBottomNavigation(
+             bottomNavigationBar: AndroidBottomNavigation(
                callback: (view) => model.navigateView(view),
              ),
             body: _buildView(model.currentView, null),

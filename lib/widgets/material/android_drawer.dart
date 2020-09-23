@@ -8,8 +8,8 @@ import 'package:bach_flutter_app/view_models/main_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class AppDrawer extends StatefulWidget {
-  const AppDrawer(
+class AndroidDrawer extends StatefulWidget {
+  const AndroidDrawer(
       {Key key, @required this.callback, @required this.currentUser})
       : super(key: key);
 
@@ -17,10 +17,10 @@ class AppDrawer extends StatefulWidget {
   final User currentUser;
 
   @override
-  _AppDrawerState createState() => _AppDrawerState();
+  _AndroidDrawerState createState() => _AndroidDrawerState();
 }
 
-class _AppDrawerState extends State<AppDrawer> {
+class _AndroidDrawerState extends State<AndroidDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(

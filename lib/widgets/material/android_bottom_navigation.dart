@@ -6,17 +6,18 @@ import 'package:bach_flutter_app/view_models/main_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class AppBottomNavigation extends StatefulWidget {
-  const AppBottomNavigation({Key key, @required this.callback})
+class AndroidBottomNavigation extends StatefulWidget {
+  const AndroidBottomNavigation({Key key, @required this.callback})
       : super(key: key);
 
   final MainViewChildCallback callback;
 
   @override
-  _AppBottomNavigationState createState() => _AppBottomNavigationState();
+  _AndroidBottomNavigationState createState() =>
+      _AndroidBottomNavigationState();
 }
 
-class _AppBottomNavigationState extends State<AppBottomNavigation> {
+class _AndroidBottomNavigationState extends State<AndroidBottomNavigation> {
   int _selectedIndex = 0;
 
   @override

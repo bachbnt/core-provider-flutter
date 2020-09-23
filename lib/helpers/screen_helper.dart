@@ -12,4 +12,6 @@ class ScreenHelper {
     screenHeight = _mediaQueryData.size.height;
     orientation = _mediaQueryData.orientation;
   }
+
+  static bool isPortrait() => orientation == Orientation.portrait;
 }
