@@ -8,6 +8,7 @@ enum MainViewChild { MainView1, MainView2, MainView3, MainView4, MainView5 }
 class MainModel extends BaseModel {
   MainViewChild currentView = MainViewChild.MainView1;
   String currentTitle = AppStrings.main1Title;
+  int currentIndex = 0;
   final Repository _repository = Repository.instance;
   User currentUser;
 
@@ -17,6 +18,11 @@ class MainModel extends BaseModel {
     if (newView == currentView) return;
     currentView = newView;
     _changeAppBarTitle();
+    notifyListeners();
+  }
+
+  void updateIndex(int newIndex) {
+    currentIndex = newIndex;
     notifyListeners();
   }
 
@@ -36,6 +42,9 @@ class MainModel extends BaseModel {
         break;
       case MainViewChild.MainView5:
         currentTitle = AppStrings.main5Title;
+        break;
+      default:
+        currentTitle = AppStrings.main1Title;
         break;
     }
   }

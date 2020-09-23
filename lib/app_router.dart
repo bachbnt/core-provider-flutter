@@ -1,10 +1,13 @@
-import 'package:bach_flutter_app/views/cupertino/cupertino_main_view.dart';
-import 'package:bach_flutter_app/views/cupertino/cupertino_sign_in_view.dart';
-import 'package:bach_flutter_app/views/material/material_forgot_password_view.dart';
-import 'package:bach_flutter_app/views/material/material_main_view.dart';
-import 'package:bach_flutter_app/views/material/material_sign_in_view.dart';
-import 'package:bach_flutter_app/views/material/material_sign_up_view.dart';
-import 'package:bach_flutter_app/views/setting_view.dart';
+import 'package:bach_flutter_app/views/cupertino/ios_forgot_password_view.dart';
+import 'package:bach_flutter_app/views/cupertino/ios_main_view.dart';
+import 'package:bach_flutter_app/views/cupertino/ios_setting_view.dart';
+import 'package:bach_flutter_app/views/cupertino/ios_sign_in_view.dart';
+import 'package:bach_flutter_app/views/cupertino/ios_sign_up_view.dart';
+import 'package:bach_flutter_app/views/material/android_forgot_password_view.dart';
+import 'package:bach_flutter_app/views/material/android_main_view.dart';
+import 'package:bach_flutter_app/views/material/android_sign_in_view.dart';
+import 'package:bach_flutter_app/views/material/android_sign_up_view.dart';
+import 'package:bach_flutter_app/views/material/android_setting_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,17 +22,17 @@ class MaterialAppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case initialRoute:
-        return MaterialPageRoute<dynamic>(builder: (_) => MaterialSignInView());
+        return MaterialPageRoute<dynamic>(builder: (_) => AndroidSignInView());
       case signInRoute:
-        return MaterialPageRoute<dynamic>(builder: (_) => MaterialSignInView());
+        return MaterialPageRoute<dynamic>(builder: (_) => AndroidSignInView());
       case signUpRoute:
-        return MaterialPageRoute<dynamic>(builder: (_) => SignUpView());
+        return MaterialPageRoute<dynamic>(builder: (_) => AndroidSignUpView());
       case forgotPasswordRoute:
-        return MaterialPageRoute<dynamic>(builder: (_) => ForgotPasswordView());
+        return MaterialPageRoute<dynamic>(builder: (_) => AndroidForgotPasswordView());
       case mainRoute:
-        return MaterialPageRoute<dynamic>(builder: (_) => MaterialMainView());
+        return MaterialPageRoute<dynamic>(builder: (_) => AndroidMainView());
       case settingRoute:
-        return MaterialPageRoute<dynamic>(builder: (_) => SettingView());
+        return MaterialPageRoute<dynamic>(builder: (_) => AndroidSettingView());
       default:
         return MaterialPageRoute<dynamic>(builder: (_) {
           return Scaffold(
@@ -49,19 +52,19 @@ class CupertinoAppRouter {
     switch (settings.name) {
       case initialRoute:
         return CupertinoPageRoute<dynamic>(
-            builder: (_) => CupertinoSignInView());
+            builder: (_) => IOSSignInView());
       case signInRoute:
         return CupertinoPageRoute<dynamic>(
-            builder: (_) => CupertinoSignInView());
+            builder: (_) => IOSSignInView());
       case signUpRoute:
-        return CupertinoPageRoute<dynamic>(builder: (_) => SignUpView());
+        return CupertinoPageRoute<dynamic>(builder: (_) => IOSSignUpView());
       case forgotPasswordRoute:
         return CupertinoPageRoute<dynamic>(
-            builder: (_) => ForgotPasswordView());
+            builder: (_) => IOSForgotPasswordView());
       case mainRoute:
-        return CupertinoPageRoute<dynamic>(builder: (_) => CupertinoMainView());
+        return CupertinoPageRoute<dynamic>(builder: (_) => IOSMainView());
       case settingRoute:
-        return CupertinoPageRoute<dynamic>(builder: (_) => SettingView());
+        return CupertinoPageRoute<dynamic>(builder: (_) => IOSSettingView());
       default:
         return CupertinoPageRoute<dynamic>(builder: (_) {
           return CupertinoPageScaffold(

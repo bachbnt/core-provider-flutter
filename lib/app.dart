@@ -3,8 +3,8 @@ import 'package:bach_flutter_app/app_router.dart';
 import 'package:bach_flutter_app/configures/app_config.dart';
 import 'package:bach_flutter_app/view_models/locale_model.dart';
 import 'package:bach_flutter_app/view_models/theme_model.dart';
-import 'package:bach_flutter_app/views/cupertino/cupertino_sign_in_view.dart';
-import 'package:bach_flutter_app/views/material/material_sign_in_view.dart';
+import 'package:bach_flutter_app/views/cupertino/ios_sign_in_view.dart';
+import 'package:bach_flutter_app/views/material/android_sign_in_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -36,7 +36,7 @@ class FlutterApp extends StatelessWidget {
               color: AppConfig.platformColor,
               location: BannerLocation.topEnd,
               child:
-                  NativeApp(themeModel: themeModel, localeModel: localeModel),
+                  PlatformApp(themeModel: themeModel, localeModel: localeModel),
             ),
           ),
         );
@@ -45,18 +45,18 @@ class FlutterApp extends StatelessWidget {
   }
 }
 
-class NativeApp extends StatelessWidget {
+class PlatformApp extends StatelessWidget {
   final ThemeModel themeModel;
   final LocaleModel localeModel;
 
-  const NativeApp({@required this.themeModel, @required this.localeModel});
+  const PlatformApp({@required this.themeModel, @required this.localeModel});
 
   @override
   Widget build(BuildContext context) {
-    return _buildNativeApp();
+    return _buildPlatformApp();
   }
 
-  Widget _buildNativeApp() {
+  Widget _buildPlatformApp() {
     if (AppConfig.isIOS())
       return CupertinoApp(
         localizationsDelegates: <LocalizationsDelegate<dynamic>>[
@@ -66,13 +66,12 @@ class NativeApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: supportedLocales,
-        theme: MaterialBasedCupertinoThemeData(
-            materialTheme: themeModel.currentTheme),
+        theme: themeModel.cupertinoCurrentTheme,
         locale: localeModel.currentLocale,
         onGenerateRoute: CupertinoAppRouter.generateRoute,
         initialRoute: initialRoute,
         debugShowCheckedModeBanner: false,
-        home: CupertinoSignInView(),
+        home: IOSSignInView(),
       );
     return MaterialApp(
       localizationsDelegates: <LocalizationsDelegate<dynamic>>[
@@ -82,12 +81,12 @@ class NativeApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: supportedLocales,
-      theme: themeModel.currentTheme,
+      theme: themeModel.materialCurrentTheme,
       locale: localeModel.currentLocale,
       onGenerateRoute: MaterialAppRouter.generateRoute,
       initialRoute: initialRoute,
       debugShowCheckedModeBanner: false,
-      home: MaterialSignInView(),
+      home: AndroidSignInView(),
     );
   }
 }

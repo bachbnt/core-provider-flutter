@@ -32,7 +32,7 @@ abstract class AppStrings {
 
   //changeable
   static const String main1Title = 'main1Title';
-  static const String main2Title = 'main1Title';
+  static const String main2Title = 'main2Title';
   static const String main3Title = 'main3Title';
   static const String main4Title = 'main4Title';
   static const String main5Title = 'main5Title';

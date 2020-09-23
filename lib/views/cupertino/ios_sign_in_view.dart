@@ -7,20 +7,20 @@ import 'package:bach_flutter_app/view_models/base_model.dart';
 import 'package:bach_flutter_app/view_models/sign_in_model.dart';
 import 'package:bach_flutter_app/view_models/validation_model.dart';
 import 'package:bach_flutter_app/views/base_view_2.dart';
-import 'package:bach_flutter_app/widgets/material/android_flat_button.dart';
-import 'package:bach_flutter_app/widgets/material/android_progress_indicator.dart';
-import 'package:bach_flutter_app/widgets/material/android_raised_button.dart';
-import 'package:bach_flutter_app/widgets/material/android_text_field.dart';
+import 'package:bach_flutter_app/widgets/cupertino/ios_activity_indicator.dart';
+import 'package:bach_flutter_app/widgets/cupertino/ios_button.dart';
+import 'package:bach_flutter_app/widgets/cupertino/ios_text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:bach_flutter_app/widgets/orientation_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class MaterialSignInView extends StatefulWidget {
+class IOSSignInView extends StatefulWidget {
   @override
-  _MaterialSignInViewState createState() => _MaterialSignInViewState();
+  _IOSSignInViewState createState() => _IOSSignInViewState();
 }
 
-class _MaterialSignInViewState extends State<MaterialSignInView> {
+class _IOSSignInViewState extends State<IOSSignInView> {
   final GlobalKey _globalKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -30,6 +30,10 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
     return BaseView2<SignInModel, ValidationModel>(
         model1: SignInModel(),
         model2: ValidationModel(),
+        onModelReady: (signInModel, _) {
+          signInModel.email = 'bachbnt@gmail.com';
+          signInModel.password = '123456';
+        },
         builder: (BuildContext context, SignInModel signInModel,
             ValidationModel validationModel, _) {
           return Scaffold(
@@ -55,18 +59,18 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
                 child: const Image(image: AssetImage(AppImages.logoImage))),
             Expanded(
               child: signInModel.viewState == ViewState.Busy
-                  ? AndroidCircularProgress()
+                  ? IOSActivityIndicator()
                   : Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        AndroidTextField(
+                        IOSTextField(
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.email))}',
                           errorText: validationModel.email.error,
                           controller: TextEditingController(
-                              text: validationModel.email.value),
+                              text: signInModel.email),
                           onChanged: (String value) {
                             signInModel.email = value.trim();
                             validationModel.onEmailChanged(value.trim());
@@ -75,13 +79,13 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
                         SizedBox(
                           height: ScreenHelper.screenHeight / 48,
                         ),
-                        AndroidTextField(
+                        IOSTextField(
                           obscureText: true,
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.password))}',
                           errorText: validationModel.password.error,
                           controller: TextEditingController(
-                              text: validationModel.password.value),
+                              text: signInModel.password),
                           onChanged: (String value) {
                             signInModel.password = value.trim();
                             validationModel.onPasswordChanged(value.trim());
@@ -89,7 +93,7 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
                         ),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: AndroidFlatButton(
+                          child: IOSButton(
                             title:
                                 '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.forgotPassword))}?',
                             onPressed: () => Navigator.of(context)
@@ -99,7 +103,7 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
                         SizedBox(
                           height: ScreenHelper.screenHeight / 12,
                         ),
-                        AndroidRaisedButton(
+                        IOSButton(
                           title:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.signIn))}',
                           onPressed: () async {
@@ -111,7 +115,7 @@ class _MaterialSignInViewState extends State<MaterialSignInView> {
                                   .pushReplacementNamed(mainRoute);
                           },
                         ),
-                        AndroidFlatButton(
+                        IOSButton(
                           title:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.signUp))}',
                           onPressed: () =>

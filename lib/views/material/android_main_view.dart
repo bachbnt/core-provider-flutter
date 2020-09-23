@@ -6,17 +6,18 @@ import 'package:bach_flutter_app/views/first_view.dart';
 import 'package:bach_flutter_app/views/fourth_view.dart';
 import 'package:bach_flutter_app/views/second_view.dart';
 import 'package:bach_flutter_app/views/third_view.dart';
+import 'package:bach_flutter_app/widgets/material/android_app_bar.dart';
 import 'package:bach_flutter_app/widgets/material/android_bottom_navigation.dart';
 import 'package:bach_flutter_app/widgets/material/android_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class MaterialMainView extends StatefulWidget {
+class AndroidMainView extends StatefulWidget {
   @override
-  _MaterialMainViewState createState() => _MaterialMainViewState();
+  _AndroidMainViewState createState() => _AndroidMainViewState();
 }
 
-class _MaterialMainViewState extends State<MaterialMainView> {
+class _AndroidMainViewState extends State<AndroidMainView> {
   final GlobalKey _key = GlobalKey<ScaffoldState>();
 
   @override
@@ -29,21 +30,20 @@ class _MaterialMainViewState extends State<MaterialMainView> {
         builder: (BuildContext context, MainModel model, _) {
           return Scaffold(
             key: _key,
-            appBar: AppBar(
-              centerTitle: true,
-              title: Text(
-                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(model.currentTitle))}'),
+            appBar: AndroidAppBar(
+              text:
+                  '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(model.currentTitle))}',
             ),
-            // drawer: AppDrawer(
-            //   currentUser: model.currentUser,
-            //   callback: (MainViewChild view) {
-            //     model.navigateView(view);
-            //     Navigator.of(context).pop();
-            //   },
-            // ),
-             bottomNavigationBar: AndroidBottomNavigation(
-               callback: (view) => model.navigateView(view),
-             ),
+            drawer: AndroidDrawer(
+              currentUser: model.currentUser,
+              callback: (MainViewChild view) {
+                model.navigateView(view);
+                Navigator.of(context).pop();
+              },
+            ),
+            //  bottomNavigationBar: AndroidBottomNavigation(
+            //    callback: (view) => model.navigateView(view),
+            //  ),
             body: _buildView(model.currentView, null),
           );
         });

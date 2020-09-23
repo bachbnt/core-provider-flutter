@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class IOSButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
+  const IOSButton({Key key, @required this.title, this.onPressed})
+      : super(key: key);
 
-  IOSButton({@required this.text, @required this.onPressed});
+  final String title;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-      child: Text(text),
+      child: Text('$title'),
       onPressed: onPressed,
     );
   }

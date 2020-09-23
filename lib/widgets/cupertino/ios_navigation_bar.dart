@@ -4,14 +4,15 @@ const double _kNavBarPersistentHeight = 44.0;
 
 class IOSNavigationBar extends StatelessWidget
     implements ObstructingPreferredSizeWidget {
-  final String text;
+  const IOSNavigationBar({Key key, @required this.text}) : super(key: key);
 
-  IOSNavigationBar({@required this.text});
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoNavigationBar(
-      middle: Text(text),
+      automaticallyImplyLeading: true,
+      middle: Text('$text'),
     );
   }
 

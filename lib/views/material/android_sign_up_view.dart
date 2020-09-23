@@ -15,12 +15,12 @@ import 'package:bach_flutter_app/widgets/orientation_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class SignUpView extends StatefulWidget {
+class AndroidSignUpView extends StatefulWidget {
   @override
-  _SignUpViewState createState() => _SignUpViewState();
+  _AndroidSignUpViewState createState() => _AndroidSignUpViewState();
 }
 
-class _SignUpViewState extends State<SignUpView> {
+class _AndroidSignUpViewState extends State<AndroidSignUpView> {
   final GlobalKey _key = GlobalKey<ScaffoldState>();
 
   @override
@@ -66,8 +66,8 @@ class _SignUpViewState extends State<SignUpView> {
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.email))}',
                           errorText: validationModel.email.error,
-                          controller: TextEditingController(
-                              text: validationModel.email.value),
+                          controller:
+                              TextEditingController(text: signUpModel.email),
                           onChanged: (String value) {
                             signUpModel.email = value.trim();
                             validationModel.onEmailChanged(value.trim());
@@ -78,7 +78,7 @@ class _SignUpViewState extends State<SignUpView> {
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.firstName))}',
                           errorText: validationModel.firstName.error,
                           controller: TextEditingController(
-                              text: validationModel.firstName.value),
+                              text: signUpModel.firstName),
                           onChanged: (String value) {
                             signUpModel.firstName = value.trim();
                             validationModel.onFirstNameChanged(value.trim());
@@ -88,8 +88,8 @@ class _SignUpViewState extends State<SignUpView> {
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.lastName))}',
                           errorText: validationModel.lastName.error,
-                          controller: TextEditingController(
-                              text: validationModel.lastName.value),
+                          controller:
+                              TextEditingController(text: signUpModel.lastName),
                           onChanged: (String value) {
                             signUpModel.lastName = value.trim();
                             validationModel.onLastNameChanged(value.trim());
@@ -100,8 +100,8 @@ class _SignUpViewState extends State<SignUpView> {
                           hintText:
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.password))}',
                           errorText: validationModel.password.error,
-                          controller: TextEditingController(
-                              text: validationModel.password.value),
+                          controller:
+                              TextEditingController(text: signUpModel.password),
                           onChanged: (String value) {
                             signUpModel.password = value.trim();
                             validationModel.onPasswordChanged(value.trim());
@@ -113,7 +113,7 @@ class _SignUpViewState extends State<SignUpView> {
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.confirmationPassword))}',
                           errorText: validationModel.confirmationPassword.error,
                           controller: TextEditingController(
-                              text: validationModel.confirmationPassword.value),
+                              text: signUpModel.confirmationPassword),
                           onChanged: (String value) {
                             signUpModel.confirmationPassword = value.trim();
                             validationModel

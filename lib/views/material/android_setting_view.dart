@@ -1,5 +1,4 @@
 import 'package:bach_flutter_app/app_localizations.dart';
-import 'package:bach_flutter_app/app_router.dart';
 import 'package:bach_flutter_app/constants/app_strings.dart';
 import 'package:bach_flutter_app/view_models/locale_model.dart';
 import 'package:bach_flutter_app/view_models/setting_model.dart';
@@ -10,12 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class SettingView extends StatefulWidget {
+class AndroidSettingView extends StatefulWidget {
   @override
-  _SettingViewState createState() => _SettingViewState();
+  _AndroidSettingViewState createState() => _AndroidSettingViewState();
 }
 
-class _SettingViewState extends State<SettingView> {
+class _AndroidSettingViewState extends State<AndroidSettingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

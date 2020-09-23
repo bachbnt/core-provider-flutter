@@ -27,14 +27,7 @@ class _CustomExpansionState extends State<CustomExpansion> {
   Widget build(BuildContext context) {
     return ExpansionTile(
         title: widget.header,
-        children:
-            widget.itemCount != null ? _buildTileList() : widget.children);
-  }
-
-  List<Widget> _buildTileList() {
-    List<Widget> tiles = [];
-    for (int index = 0; index < widget.itemCount; index++)
-      tiles.add(widget.itemBuilder(index));
-    return tiles;
+        children: List<Widget>.generate(
+            widget.itemCount, (index) => widget.itemBuilder(index)));
   }
 }

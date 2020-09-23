@@ -7,6 +7,6 @@ import 'package:flutter/material.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   AppConfig.appFlavor = Flavor.DEVELOPMENT;
-  AppConfig.appPlatform = Platform.IOS;
+  AppConfig.appPlatform = Platform.ANDROID;
   runApp(FlutterApp());
 }

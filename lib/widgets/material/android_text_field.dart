@@ -24,9 +24,7 @@ class AndroidTextField extends StatelessWidget {
       obscureText: obscureText,
       controller: controller,
       decoration: InputDecoration(
-          hintText: hintText ?? hintText,
-          labelText: labelText ?? labelText,
-          errorText: errorText),
+          hintText: hintText, labelText: labelText, errorText: errorText),
       onChanged: onChanged,
     );
   }

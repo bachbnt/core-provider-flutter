@@ -15,12 +15,12 @@ import 'package:bach_flutter_app/widgets/orientation_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ForgotPasswordView extends StatefulWidget {
+class AndroidForgotPasswordView extends StatefulWidget {
   @override
-  _ForgotPasswordViewState createState() => _ForgotPasswordViewState();
+  _AndroidForgotPasswordViewState createState() => _AndroidForgotPasswordViewState();
 }
 
-class _ForgotPasswordViewState extends State<ForgotPasswordView> {
+class _AndroidForgotPasswordViewState extends State<AndroidForgotPasswordView> {
   final GlobalKey _globalKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -68,7 +68,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                               '${toBeginningOfSentenceCase(AppLocalizations.of(context).translate(AppStrings.email))}',
                           errorText: validationModel.email.error,
                           controller: TextEditingController(
-                              text: validationModel.email.value),
+                              text: forgotPasswordModel.email),
                           onChanged: (String value) {
                             forgotPasswordModel.email = value;
                             validationModel.onEmailChanged(value);

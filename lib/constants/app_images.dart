@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppImages {
@@ -7,11 +6,11 @@ abstract class AppImages {
   static const String logoImage = '${_imagesUri}logo.png';
 
   //icons
-  static const IconData main1Icon = Icons.android;
-  static const IconData main2Icon = Icons.android;
-  static const IconData main3Icon = Icons.android;
-  static const IconData main4Icon = Icons.android;
-  static const IconData main5Icon = Icons.android;
+  static const IconData main1Icon = Icons.smartphone;
+  static const IconData main2Icon = Icons.smartphone;
+  static const IconData main3Icon = Icons.smartphone;
+  static const IconData main4Icon = Icons.smartphone;
+  static const IconData main5Icon = Icons.smartphone;
   static const IconData settingIcon = Icons.settings;
   static const IconData signOutIcon = Icons.exit_to_app;
 }
