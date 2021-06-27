@@ -1,12 +1,5 @@
-import 'package:bach_flutter_app/models/user.dart';
-
 class Repository {
-  static Repository _instance;
-
-  static Repository get instance {
-    if (_instance == null) _instance = Repository();
-    return _instance;
-  }
-
-  User currentUser;
+  const Repository._internal();
+  static final Repository _instance = Repository._internal();
+  factory Repository.instance() => _instance;
 }
